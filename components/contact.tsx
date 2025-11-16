@@ -11,9 +11,9 @@ export default function Contact() {
   }
 
   return (
-    <section className="py-24 px-6 bg-card/30">
+    <section className="py-16 px-6 bg-card/30">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             Let's <span className="text-accent">Connect</span>
           </h2>

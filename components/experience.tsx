@@ -27,13 +27,13 @@ const skills = [
 
 export default function Experience() {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-16 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
           Experience & <span className="text-accent">Skills</span>
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 mt-16">
+        <div className="grid md:grid-cols-2 gap-12 mt-12">
           {/* Experience */}
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-8">Work History</h3>

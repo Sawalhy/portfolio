@@ -13,12 +13,12 @@ const galleryImages = [
 
 export default function Gallery() {
   return (
-    <section className="py-24 px-6 bg-card/30">
+    <section className="py-4 px-6 bg-card/30">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
           Climbing & <span className="text-accent">Life</span>
         </h2>
-        <p className="text-muted-foreground text-lg mb-16 max-w-2xl">
+        <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
           When I'm not coding, you'll find me on the wall or exploring the outdoors.
         </p>
 

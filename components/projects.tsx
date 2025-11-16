@@ -31,16 +31,16 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="py-24 px-6 bg-background">
+    <section className="py-16 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
           Selected <span className="text-accent">Work</span>
         </h2>
-        <p className="text-muted-foreground text-lg mb-16 max-w-2xl">
+        <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
           Here are some projects I've built that showcase my approach to solving problems with code.
         </p>
 
-        <div className="space-y-16">
+        <div className="space-y-12">
           {projects.map((project) => (
             <div key={project.id} className="group">
               <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300">
