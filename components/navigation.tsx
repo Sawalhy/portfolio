@@ -1,64 +1,132 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState, useRef, useEffect } from 'react'
 
 interface NavigationProps {
   activeSection: string
   setActiveSection: (section: string) => void
+  scrollProgress?: number
+  sectionPositions?: Record<string, number>
 }
 
-export default function Navigation({ setActiveSection }: NavigationProps) {
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
+]
+
+export default function Navigation({ activeSection, setActiveSection, scrollProgress = 0, sectionPositions = {} }: NavigationProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [headerSticky, setHeaderSticky] = useState(false)
-
-  const handleScroll = () => {
-    setHeaderSticky(window.scrollY > 100)
-  }
-
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' },
-  ]
+  const containerRef = useRef<HTMLDivElement>(null)
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [trackStart, setTrackStart] = useState(0)
+  const [trackHeight, setTrackHeight] = useState(0)
 
   const handleNavClick = (id: string) => {
-    setActiveSection(id)
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setMobileOpen(false)
   }
 
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleScroll)
-  }
+  // Determine active section based on scroll position (not clicks)
+  const currentSectionIndex = navItems.findLastIndex(item => scrollProgress >= (sectionPositions[item.id] || 0))
+  const currentSection = currentSectionIndex >= 0 ? navItems[currentSectionIndex].id : navItems[0].id
+
+  // Find highest reached section and calculate fill percentage
+  const reachedIndex = navItems.findLastIndex(item => scrollProgress >= (sectionPositions[item.id] || 0))
+  const fillPercent = scrollProgress >= 100 ? 100 : reachedIndex < 0 ? 0 : (() => {
+    // Map each section to its position on the track (0% to 100%)
+    const sectionPercent = (index: number) => (index / (navItems.length - 1)) * 100
+    
+    if (reachedIndex === navItems.length - 1) {
+      // Last section reached, fill to 100%
+      return 100
+    }
+    
+    // Interpolate between current and next section
+    const currentPos = sectionPositions[navItems[reachedIndex].id] || 0
+    const nextPos = sectionPositions[navItems[reachedIndex + 1].id] || 100
+    const range = nextPos - currentPos
+    const progress = range > 0 ? Math.max(0, Math.min(1, (scrollProgress - currentPos) / range)) : 0
+    
+    const currentPercent = sectionPercent(reachedIndex)
+    const nextPercent = sectionPercent(reachedIndex + 1)
+    
+    return currentPercent + (nextPercent - currentPercent) * progress
+  })()
+
+  const fillHeight = trackHeight > 0 ? (fillPercent / 100) * trackHeight : 0
+
+  useEffect(() => {
+    const measureTrack = () => {
+      if (!containerRef.current || itemRefs.current.length === 0) return
+      const first = itemRefs.current[0]
+      const last = itemRefs.current[itemRefs.current.length - 1]
+      if (!first || !last) return
+
+      const containerRect = containerRef.current.getBoundingClientRect()
+      const firstRect = first.getBoundingClientRect()
+      const lastRect = last.getBoundingClientRect()
+      const circleRadius = firstRect.height / 2
+
+      const start = firstRect.top - containerRect.top + circleRadius
+      const end = lastRect.top - containerRect.top + circleRadius
+
+      setTrackStart(start)
+      setTrackHeight(Math.max(0, end - start))
+    }
+
+    measureTrack()
+    window.addEventListener('resize', measureTrack)
+    return () => window.removeEventListener('resize', measureTrack)
+  }, [])
 
   return (
     <>
-      <nav className={`hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-64 md:flex md:flex-col md:bg-card md:border-r md:border-border md:p-8 md:z-40 ${
-        headerSticky ? 'md:shadow-xl' : ''
-      }`}>
+      <nav className="hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-72 md:flex md:flex-col md:bg-card md:border-r md:border-border md:p-8 md:z-40 relative">
         <div className="mb-12">
-          <h1 className="text-2xl font-bold text-foreground">
-            Sawalhy<span className="text-accent">.</span>
-          </h1>
+          <h1 className="text-2xl font-bold text-foreground">Sawalhy<span className="text-accent">.</span></h1>
           <p className="text-sm text-muted-foreground mt-2">Full Stack Engineer</p>
         </div>
 
-        <div className="space-y-6 flex-1">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="block w-full text-left text-foreground hover:text-accent transition-colors duration-200 font-medium"
-            >
-              {item.label}
-            </button>
-          ))}
+        <div className="flex-1 relative">
+          <div ref={containerRef} className="space-y-6 relative">
+            {trackHeight > 0 && (
+              <div
+                className="absolute left-0 w-1 bg-border/80 z-40"
+                style={{ top: `${trackStart}px`, height: `${trackHeight}px` }}
+              >
+                <div
+                  className="absolute left-0 top-0 w-full bg-accent transition-all duration-300 ease-out"
+                  style={{ height: `${fillHeight}px` }}
+                />
+              </div>
+            )}
+
+            {navItems.map((item, index) => {
+              const isActive = currentSection === item.id
+              const hasReached = scrollProgress >= (sectionPositions[item.id] || 0)
+              const circleStyle = isActive ? 'bg-accent border-accent' : hasReached ? 'bg-accent border-accent' : 'bg-background border-border'
+              
+              return (
+                <div
+                  key={item.id}
+                  ref={(el) => {
+                    itemRefs.current[index] = el
+                  }}
+                  className="relative flex items-center"
+                >
+                  <div className="absolute left-0.5 -translate-x-1/2 z-50">
+                    <div className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${circleStyle}`} />
+                  </div>
+                  <button onClick={() => handleNavClick(item.id)} className="block w-full text-left text-foreground hover:text-accent transition-colors duration-200 font-medium pl-5">
+                    {item.label}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
         <div className="pt-8 border-t border-border space-y-4">
@@ -79,30 +147,19 @@ export default function Navigation({ setActiveSection }: NavigationProps) {
         </div>
       </nav>
 
-      {/* Mobile menu button */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-card border-b border-border p-4 z-50 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-foreground">
-          Sawalhy<span className="text-accent">.</span>
-        </h1>
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="text-foreground hover:text-accent"
-        >
+        <h1 className="text-xl font-bold text-foreground">Sawalhy<span className="text-accent">.</span></h1>
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="text-foreground hover:text-accent">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 top-16 bg-card border-b border-border p-4 space-y-4 z-40">
           {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="block w-full text-left text-foreground hover:text-accent transition-colors py-2"
-            >
+            <button key={item.id} onClick={() => handleNavClick(item.id)} className="block w-full text-left text-foreground hover:text-accent transition-colors py-2">
               {item.label}
             </button>
           ))}
