@@ -1,21 +1,30 @@
 'use client'
 
 interface ProgressIndicatorProps {
-  scrollProgress: number
+  progress: number
 }
 
-export default function ProgressIndicator({ scrollProgress }: ProgressIndicatorProps) {
+export default function ProgressIndicator({ progress }: ProgressIndicatorProps) {
   return (
-    <div className="fixed left-8 top-1/2 -translate-y-1/2 h-64 hidden lg:flex flex-col items-center gap-4 z-30">
-      {/* Vertical progress line */}
-      <div className="w-0.5 h-64 bg-border">
+    <>
+      <div className="fixed left-0 top-0 h-screen w-1 bg-border/30 z-30 hidden md:block">
         <div
-          className="w-full bg-accent transition-all duration-300 ease-out"
-          style={{ height: `${scrollProgress * 100}%` }}
+          className="w-full bg-accent transition-all duration-300"
+          style={{ height: `${progress}%` }}
         />
       </div>
-      {/* Circle indicator */}
-      <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-accent rounded-full border-2 border-background transform translate-x-1/2" />
-    </div>
+      
+      {/* Progress circle indicator */}
+      <div
+        className="fixed left-0 w-1 bg-accent z-30 hidden md:block transition-all duration-300"
+        style={{
+          top: `${progress}%`,
+          height: '4px',
+          boxShadow: '0 0 0 8px rgba(var(--accent), 0.1)',
+          borderRadius: '2px',
+          transform: 'translateY(-2px)',
+        }}
+      />
+    </>
   )
 }

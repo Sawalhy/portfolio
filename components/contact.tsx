@@ -7,7 +7,6 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
     console.log('Form submitted:', formState)
   }
 
@@ -19,7 +18,7 @@ export default function Contact() {
             Let's <span className="text-accent">Connect</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Whether you want to collaborate, chat, or discuss climbing – I'm always interested in connecting with people.
+            Whether you want to collaborate, chat, or grab coffee—I'm always interested in new opportunities.
           </p>
         </div>
 
@@ -84,7 +83,7 @@ export default function Contact() {
                 </a>
                 <a href="https://linkedin.com/in/sawalhyahmed" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-foreground hover:text-accent transition-colors">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.25-.129.599-.129.948v5.419h-3.554s.047-8.733 0-9.646h3.554v1.364c.427-.659 1.189-1.599 2.894-1.599 2.114 0 3.696 1.382 3.696 4.354v5.527zM5.337 9.433c-1.144 0-1.915-.759-1.915-1.71 0-.954.77-1.71 1.958-1.71 1.187 0 1.915.756 1.94 1.71 0 .951-.753 1.71-1.983 1.71zm1.581 11.019H3.757V9.806h3.161v10.646zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
                   </svg>
                   LinkedIn
                 </a>

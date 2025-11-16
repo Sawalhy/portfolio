@@ -6,24 +6,24 @@ const projects = [
   {
     id: 1,
     title: 'Traffic Data Scraper',
-    description: 'Built a traffic surrogate data pipeline on different cloud providers to programmatically collect live travel-time estimates from public map services. Produced a historical dataset and Tableau dashboard.',
-    tags: ['Python', 'AWS', 'GCP', 'Tableau', 'Data Pipeline'],
+    description: 'Built a traffic surrogate data pipeline on multiple cloud providers to programmatically collect live travel-time estimates from public map services. Produced historical dataset and Tableau dashboard for non-instrumented corridors.',
+    tags: ['Python', 'Cloud', 'Data Pipeline', 'Tableau'],
     image: '/modern-collaborative-workspace-interface.jpg',
     link: '#'
   },
   {
     id: 2,
     title: 'Price-Intel E-commerce Scraper',
-    description: 'Web interface to track prices across multiple products and retailers with scheduled runs that automatically flag price changes.',
-    tags: ['React', 'Node.js', 'Web Scraping', 'PostgreSQL'],
+    description: 'Web interface to track prices across multiple products and retailers with scheduled runs that automatically flag price changes. Provides real-time market insights and competitive pricing analysis.',
+    tags: ['Web Scraping', 'Node.js', 'React', 'Database'],
     image: '/climbing-route-tracking-app-interface.jpg',
     link: '#'
   },
   {
     id: 3,
     title: 'TimeSync – Multi-Timezone Tracker',
-    description: 'Full-stack React/TypeScript + Express app for remote teams to track 400+ timezones with real-time clocks, solar day/night timelines, and JWT-secured dashboards.',
-    tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Neon'],
+    description: 'Full-stack React/TypeScript + Express app that tracks 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured dashboards, and PostgreSQL persistence for responsive mobile-friendly experience.',
+    tags: ['React', 'TypeScript', 'Express', 'PostgreSQL'],
     image: '/enterprise-analytics-dashboard.jpg',
     link: '#'
   },

@@ -15,11 +15,9 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const windowHeight = window.innerHeight
-      const docHeight = document.documentElement.scrollHeight - windowHeight
-      const scrolled = window.scrollY
-      const scrollPercent = scrolled / docHeight
-      setScrollProgress(scrollPercent)
+      const windowHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrolled = (window.scrollY / windowHeight) * 100
+      setScrollProgress(scrolled)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -28,8 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <ProgressIndicator scrollProgress={scrollProgress} />
-      
+      <ProgressIndicator progress={scrollProgress} />
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
       <main className="ml-0 md:ml-64">
         <Hero setActiveSection={setActiveSection} />

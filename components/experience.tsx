@@ -5,30 +5,24 @@ const experiences = [
     role: 'Software Engineer',
     company: 'GISCON',
     period: 'February 2024 – Present',
-    description: 'Collaborated remotely with Kuwait-based teams to maintain 4+ critical web applications (.NET MVC, React). Led mobile app development for hazardous waste management and integrated OpenAI ChatGPT for spatial searches.',
-    skills: ['.NET', 'React', 'Capacitor', 'OpenAI', 'AWS'],
+    description: 'Collaborated remotely with Product Owner and engineers to gather requirements, implement features, and resolve 10+ production incidents. Maintained 4+ critical web applications for Kuwait EPA and Egyptian Environmental Affairs Agency. Led Capacitor mobile app development and integrated OpenAI ChatGPT for spatial searches.',
+    skills: ['.NET', 'React', 'Capacitor', 'OpenAI', 'AWS', 'Airflow'],
   },
   {
     role: 'Software Engineering Intern',
-    company: 'Valeo - GISACC',
-    period: 'October 2022 – December 2022',
-    description: 'Contributed to development of geospatial applications and learned enterprise software development practices.',
-    skills: ['GIS', '.NET', 'JavaScript', 'PostgreSQL'],
-  },
-  {
-    role: 'Software Engineering Intern',
-    company: 'Masarat Misr',
-    period: 'June 2022 – September 2022',
-    description: 'Developed features for web applications and participated in full development lifecycle.',
-    skills: ['React', 'Node.js', 'TypeScript', 'MongoDB'],
+    company: 'Valeo - GISACC & Masarat Misr',
+    period: 'October 2021 – December 2022',
+    description: 'Gained hands-on experience in software development across multiple rotations and organizations, building foundational skills in full-stack development.',
+    skills: ['Full-Stack Development', 'Git', 'Database Design'],
   },
 ]
 
 const skills = [
   ['Languages', ['C#', 'JavaScript', 'TypeScript', 'Python', 'Solidity', 'Go']],
-  ['Backend', ['.NET', 'Node.js', 'SQL', 'OpenAI API', 'Airflow']],
-  ['Frontend', ['React', 'Next.js', 'Capacitor', 'Tailwind CSS', 'Bootstrap']],
-  ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git']],
+  ['Backend', ['.NET', 'Node.js', 'SQL', 'OpenAI API']],
+  ['Frontend', ['React', 'Next.js', 'Capacitor', 'Razor', 'Tailwind CSS', 'Bootstrap', 'Ant Design']],
+  ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow']],
+  ['Testing & QA', ['Jest']],
 ] as const
 
 export default function Experience() {

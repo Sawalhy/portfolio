@@ -3,12 +3,12 @@
 import Image from 'next/image'
 
 const galleryImages = [
-  { id: 1, title: 'Mountain View', category: 'Climbing', image: '/climber-on-mountain-face.jpg' },
-  { id: 2, title: 'Sunset Peak', category: 'Adventure', image: '/sunset-mountain-landscape.jpg' },
-  { id: 3, title: 'Workspace Setup', category: 'Life', image: '/developer-workspace-desk.jpg' },
-  { id: 4, title: 'Boulder Session', category: 'Climbing', image: '/climber-on-boulder.jpg' },
-  { id: 5, title: 'Coast Views', category: 'Adventure', image: '/coastal-hiking-trail.jpg' },
-  { id: 6, title: 'Coffee & Code', category: 'Life', image: '/coffee-laptop.png' },
+  { id: 1, title: 'Mountain Wall', category: 'Climbing', image: '/climber-on-mountain-face.jpg' },
+  { id: 2, title: 'Sinai Summit', category: 'Adventure', image: '/sunset-mountain-landscape.jpg' },
+  { id: 3, title: 'Development Setup', category: 'Life', image: '/developer-workspace-desk.jpg' },
+  { id: 4, title: 'Boulder Challenge', category: 'Climbing', image: '/climber-on-boulder.jpg' },
+  { id: 5, title: 'Desert Trails', category: 'Adventure', image: '/coastal-hiking-trail.jpg' },
+  { id: 6, title: 'Code & Coffee', category: 'Life', image: '/coffee-laptop.png' },
 ]
 
 export default function Gallery() {

@@ -17,17 +17,20 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
       <div className="absolute top-20 right-20 w-72 h-72 bg-accent/20 rounded-full blur-3xl gradient-float" />
       <div className="absolute bottom-32 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" style={{ animation: 'float-gradient 8s ease-in-out infinite reverse' }} />
 
-      <div className="gradient-fade-overlay" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none opacity-100" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <div className="space-y-6">
           <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight text-balance">
-            I'm <span className="text-accent">Sawalhy</span><br />
-            Building Remarkable Things
+            Building<br />
+            <span className="relative">
+              <span className="relative z-2">Remarkable Things</span>
+              <div className="absolute bottom-2 left-0 right-0 h-1 bg-accent/40 blur-sm" />
+            </span>
           </h2>
           
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto text-balance">
-            Full-stack engineer. Rock climber. Passionate about solving complex problems with elegant code and pushing limits on the wall.
+            Full-stack developer. Rock climber. I build fast, scalable web applications and push limits on the wall.
           </p>
 
           <div className="flex gap-4 justify-center pt-8">
@@ -46,7 +49,7 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
           </div>
         </div>
 
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 animate-bounce">
           <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
