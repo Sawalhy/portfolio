@@ -41,7 +41,7 @@ const galleryImages = [
   { 
     id: 5, 
     title: 'Dahab', 
-    category: 'Adventure', 
+    category: 'Climbing', 
     image: '/DahabEgypt.jpg',
     description: 'My first 6C Lead Climb',
     location: 'Dahab, Egypt'
@@ -51,8 +51,16 @@ const galleryImages = [
     title: 'Wadi Degla', 
     category: 'Climbing', 
     image: '/WadiDegla.jpg',
-    description: 'Climbing in Wadi Degla, Cairo\'s local mini climbing paradise in the desert.',
+    description: 'Explaining rockover to friends on their first time outdoors',
     location: 'Wadi Degla, Egypt'
+  },
+  { 
+    id: 7, 
+    title: 'Ascent Competition', 
+    category: 'Climbing', 
+    image: '/AscentComp.jpg',
+    description: 'Competing at Ascent climbing gym in Cairo.',
+    location: 'Ascent, Cairo, Egypt'
   },
 ]
 

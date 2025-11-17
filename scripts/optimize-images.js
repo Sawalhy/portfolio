@@ -11,6 +11,7 @@ const imagesToOptimize = [
   'TannourineDay.jpg',
   'TannourineNight.jpg',
   'WadiDegla.jpg',
+  'AscentComp.jpg',
   'traffic-map.jpg',
   'timesync-preview.jpg',
 ];
