@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import Navigation from '../components/Navigation'
-import Hero from '../components/Hero'
-import Projects from '../components/Projects'
-import Gallery from '../components/Gallery'
-import Experience from '../components/Experience'
-import Contact from '../components/Contact'
-import ProgressIndicator from '../components/ProgressIndicator'
+import Navigation from '@/components/Navigation'
+import Hero from '@/components/Hero'
+import Projects from '@/components/Projects'
+import Gallery from '@/components/Gallery'
+import Experience from '@/components/Experience'
+import Contact from '@/components/Contact'
+import ProgressIndicator from '@/components/ProgressIndicator'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
