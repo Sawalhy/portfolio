@@ -45,10 +45,11 @@ export default function Projects() {
             <div key={project.id} className="group">
               <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300">
                 <div className="relative h-80 md:h-96 overflow-hidden">
-                  <img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                 </div>
