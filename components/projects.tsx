@@ -3,6 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+// Use basePath from Next.js config - in static export, this should be '/portfolio'
+const basePath = '/portfolio'
+
 const projects = [
   {
     id: 1,
@@ -47,7 +50,7 @@ export default function Projects() {
               <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
                 <div className="relative h-80 md:h-96 overflow-hidden">
                   <Image
-                    src={project.image || "/placeholder.svg"}
+                    src={`${basePath}${project.image || "/placeholder.svg"}`}
                     alt={project.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

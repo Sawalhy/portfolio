@@ -2,6 +2,9 @@
 
 import Image from 'next/image'
 
+// Use basePath from Next.js config - in static export, this should be '/portfolio'
+const basePath = '/portfolio'
+
 const galleryImages = [
   { id: 1, title: 'Mountain Wall', category: 'Climbing', image: '/climber-on-mountain-face.jpg' },
   { id: 2, title: 'Sinai Summit', category: 'Adventure', image: '/sunset-mountain-landscape.jpg' },
@@ -32,7 +35,7 @@ export default function Gallery() {
             >
               <div className="relative overflow-hidden bg-muted h-80 md:h-96">
                 <Image
-                  src={img.image || "/placeholder.svg"}
+                  src={`${basePath}${img.image || "/placeholder.svg"}`}
                   alt={img.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
