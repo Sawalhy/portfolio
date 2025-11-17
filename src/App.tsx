@@ -1,15 +1,13 @@
-'use client'
-
 import { useState, useEffect } from 'react'
-import Navigation from '@/components/navigation'
-import Hero from '@/components/hero'
-import Projects from '@/components/projects'
-import Gallery from '@/components/gallery'
-import Experience from '@/components/experience'
-import Contact from '@/components/contact'
-import ProgressIndicator from '@/components/progress-indicator'
+import Navigation from '@/components/Navigation'
+import Hero from '@/components/Hero'
+import Projects from '@/components/Projects'
+import Gallery from '@/components/Gallery'
+import Experience from '@/components/Experience'
+import Contact from '@/components/Contact'
+import ProgressIndicator from '@/components/ProgressIndicator'
 
-export default function Home() {
+function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [sectionProgress, setSectionProgress] = useState<Record<string, number>>({
@@ -111,3 +109,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default App

@@ -1,6 +1,6 @@
 # Portfolio
 
-A modern, responsive portfolio website showcasing my work as a full-stack developer. Built with Next.js, TypeScript, and Tailwind CSS.
+A modern, responsive portfolio website showcasing my work as a full-stack developer. Built with Vite, React, TypeScript, and Tailwind CSS.
 
 ## 🚀 Live Site
 
@@ -8,7 +8,8 @@ A modern, responsive portfolio website showcasing my work as a full-stack develo
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 16
+- **Build Tool:** Vite
+- **Framework:** React 19
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **Package Manager:** pnpm
@@ -33,20 +34,23 @@ pnpm dev
 # Build for production
 pnpm build
 
-# Start production server
-pnpm start
+# Preview production build
+pnpm preview
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site in your browser.
+Open [http://localhost:5173](http://localhost:5173) to view the site in your browser.
 
 ## 📁 Project Structure
 
 ```
 portfolio/
-├── app/              # Next.js app directory
-├── components/        # React components
-├── public/           # Static assets
-└── styles/           # Global styles
+├── src/              # Source files
+│   ├── App.tsx      # Main app component
+│   ├── main.tsx     # Entry point
+│   └── index.css    # Global styles
+├── components/       # React components
+├── public/          # Static assets
+└── index.html       # HTML template
 ```
 
 ## 🚢 Deployment
