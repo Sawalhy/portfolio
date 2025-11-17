@@ -24,7 +24,7 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
           <h2 className="text-5xl md:text-7xl font-bold text-white leading-tight text-balance">
             Building<br />
             <span className="relative">
-              <span className="relative z-2">Remarkable Things</span>
+              <span className="relative z-2">Reliability Through Maintainability</span>
               <div className="absolute bottom-2 left-0 right-0 h-1 bg-accent/40 blur-sm" />
             </span>
           </h2>

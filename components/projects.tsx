@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-// Use basePath from Next.js config - in static export, this should be '/portfolio'
-const basePath = '/portfolio'
+// Use basePath from Next.js config - empty for dev, '/portfolio' for production
+const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : ''
 
 const projects = [
   {
@@ -55,7 +55,7 @@ export default function Projects() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
