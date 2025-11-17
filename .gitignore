@@ -126,6 +126,9 @@ dist/
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 
+# Original images (backups)
+public/originals/
+
 
 
 
