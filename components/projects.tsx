@@ -1,10 +1,7 @@
-'use client'
-
-import Image from 'next/image'
-import Link from 'next/link'
-
-// Use basePath from Next.js config - empty for dev, '/portfolio' for production
-const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : ''
+// Helper to get image path with base URL
+const getImagePath = (path: string) => {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+}
 
 const projects = [
   {
@@ -38,17 +35,7 @@ const projects = [
     id: 4,
     sectionTitle: 'eMISK Applications',
     sectionDescription: 'A suite of web applications built for Kuwait\'s Environment Public Authority (EPA) to manage waste permits, hazardous waste transport, asbestos management, and waste treatment operations.',
-    sectionTags: ['.NET', 'React', 'MVC', 'Enterprise'],
     isSectionHeader: true,
-  },
-  {
-    id: 5,
-    title: 'Permit Management',
-    description: 'Waste Permit Request & Shipment Release System - An online portal that enables companies engaged in waste export and import to issue their permits electronically.',
-    tags: ['.NET', 'MVC', 'Enterprise'],
-    image: '/traffic-map.jpg',
-    link: 'https://enterprise.emisk.org/eMISKWastePermitManagement/en',
-    hasLink: true,
   },
   {
     id: 6,
@@ -58,15 +45,17 @@ const projects = [
     image: '/traffic-map.jpg',
     link: 'https://enterprise.emisk.org/eMISKWasteHazardousWasteTransport/en',
     hasLink: true,
-  },
-  {
-    id: 7,
-    title: 'Hazardous Waste Transport Mobile App',
-    description: 'Mobile application for hazardous waste transport management, built with Capacitor for cross-platform deployment.',
-    tags: ['Capacitor', 'Mobile', '.NET'],
-    image: '/traffic-map.jpg',
-    link: '#',
-    hasLink: false,
+    subProjects: [
+      {
+        id: 7,
+        title: 'Hazardous Waste Transport Mobile App',
+        description: 'Mobile application for hazardous waste transport management, built with Capacitor for cross-platform deployment.',
+        tags: ['Capacitor', 'Mobile', '.NET'],
+        image: '/traffic-map.jpg',
+        link: '#',
+        hasLink: false,
+      },
+    ],
   },
   {
     id: 8,
@@ -84,6 +73,15 @@ const projects = [
     tags: ['.NET', 'MVC', 'Enterprise'],
     image: '/traffic-map.jpg',
     link: 'https://enterprise.emisk.org/eMISKWasteTreatmentManagement',
+    hasLink: true,
+  },
+  {
+    id: 5,
+    title: 'Permit Management',
+    description: 'Waste Permit Request & Shipment Release System - An online portal that enables companies engaged in waste export and import to issue their permits electronically.',
+    tags: ['.NET', 'MVC', 'Enterprise'],
+    image: '/traffic-map.jpg',
+    link: 'https://enterprise.emisk.org/eMISKWastePermitManagement/en',
     hasLink: true,
   },
 ]
@@ -131,44 +129,89 @@ export default function Projects() {
                   {/* Wrapping container for eMISK projects */}
                   <div className="space-y-12 p-6 md:p-8 rounded-xl border-2 border-accent/30 bg-card/50 backdrop-blur-sm">
                     {emiskProjects.map((emiskProject) => (
-                      <Link 
-                        key={emiskProject.id} 
-                        href={emiskProject.link || '#'} 
-                        target={emiskProject.link !== '#' && emiskProject.hasLink ? "_blank" : undefined} 
-                        rel={emiskProject.link !== '#' && emiskProject.hasLink ? "noopener noreferrer" : undefined} 
-                        className="group block"
-                      >
-                        <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
-                          <div className="relative h-80 md:h-96 overflow-hidden">
-                            <Image
-                              src={`${basePath}${emiskProject.image || "/placeholder.svg"}`}
-                              alt={emiskProject.title || 'Project image'}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
-                          </div>
+                      <div key={emiskProject.id} className="space-y-6">
+                        <a 
+                          href={emiskProject.link || '#'} 
+                          target={emiskProject.link !== '#' && emiskProject.hasLink ? "_blank" : undefined} 
+                          rel={emiskProject.link !== '#' && emiskProject.hasLink ? "noopener noreferrer" : undefined} 
+                          className="group block"
+                        >
+                          <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
+                            <div className="relative h-80 md:h-96 overflow-hidden">
+                              <img
+                                src={getImagePath(emiskProject.image || "/placeholder.svg")}
+                                alt={emiskProject.title || 'Project image'}
+                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+                            </div>
 
-                          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                            <div className="flex items-center gap-2 mb-2">
-                              <h3 className="text-2xl md:text-3xl font-bold text-foreground">{emiskProject.title}</h3>
-                              {emiskProject.hasLink && emiskProject.link !== '#' && (
-                                <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                              )}
-                            </div>
-                            <p className="text-foreground/70 mb-4 text-sm md:text-base">{emiskProject.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {emiskProject.tags?.map((tag) => (
-                                <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
-                                  {tag}
-                                </span>
-                              ))}
+                            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                              <div className="flex items-center gap-2 mb-2">
+                                <h3 className="text-2xl md:text-3xl font-bold text-foreground">{emiskProject.title}</h3>
+                                {emiskProject.hasLink && emiskProject.link !== '#' && (
+                                  <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                  </svg>
+                                )}
+                              </div>
+                              <p className="text-foreground/70 mb-4 text-sm md:text-base">{emiskProject.description}</p>
+                              <div className="flex flex-wrap gap-2">
+                                {emiskProject.tags?.map((tag) => (
+                                  <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
+                        </a>
+                        
+                        {/* Render subProjects if they exist */}
+                        {(emiskProject as any).subProjects && (emiskProject as any).subProjects.length > 0 && (
+                          <div className="ml-4 md:ml-8 space-y-4 border-l-2 border-accent/20 pl-4 md:pl-6">
+                            <h4 className="text-lg font-semibold text-foreground/80 mb-2">Sub Projects:</h4>
+                            {(emiskProject as any).subProjects.map((subProject: any) => (
+                              <a
+                                key={subProject.id}
+                                href={subProject.link || '#'}
+                                target={subProject.link !== '#' && subProject.hasLink ? "_blank" : undefined}
+                                rel={subProject.link !== '#' && subProject.hasLink ? "noopener noreferrer" : undefined}
+                                className="group block"
+                              >
+                                <div className="relative overflow-hidden rounded-lg bg-card/80 border border-border/50 hover:border-accent/50 transition-colors duration-300 cursor-pointer">
+                                  <div className="relative h-48 md:h-64 overflow-hidden">
+                                    <img
+                                      src={getImagePath(subProject.image || "/placeholder.svg")}
+                                      alt={subProject.title || 'Sub-project image'}
+                                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+                                  </div>
+                                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <h4 className="text-lg md:text-xl font-bold text-foreground">{subProject.title}</h4>
+                                      {subProject.hasLink && subProject.link !== '#' && (
+                                        <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                      )}
+                                    </div>
+                                    <p className="text-foreground/70 mb-2 text-xs md:text-sm">{subProject.description}</p>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {subProject.tags?.map((tag: string) => (
+                                        <span key={tag} className="px-2 py-0.5 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                          {tag}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -181,7 +224,7 @@ export default function Projects() {
             }
 
             return (
-              <Link 
+              <a 
                 key={project.id} 
                 href={project.link || '#'} 
                 target={project.link !== '#' && project.hasLink ? "_blank" : undefined} 
@@ -190,11 +233,10 @@ export default function Projects() {
               >
                 <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
                   <div className="relative h-80 md:h-96 overflow-hidden">
-                    <Image
-                      src={`${basePath}${project.image || "/placeholder.svg"}`}
+                    <img
+                      src={getImagePath(project.image || "/placeholder.svg")}
                       alt={project.title || 'Project image'}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
                   </div>
@@ -223,7 +265,7 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </a>
             )
           })}
         </div>

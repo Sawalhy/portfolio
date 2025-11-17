@@ -1,9 +1,7 @@
-'use client'
-
-import Image from 'next/image'
-
-// Use basePath from Next.js config - empty for dev, '/portfolio' for production
-const basePath = process.env.NODE_ENV === 'production' ? '/portfolio' : ''
+// Helper to get image path with base URL
+const getImagePath = (path: string) => {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+}
 
 const galleryImages = [
   { 
@@ -84,11 +82,10 @@ export default function Gallery() {
               }`}
             >
               <div className="relative overflow-hidden bg-muted h-80 md:h-96">
-                <Image
-                  src={`${basePath}${img.image || "/placeholder.svg"}`}
+                <img
+                  src={getImagePath(img.image || "/placeholder.svg")}
                   alt={img.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 w-full">

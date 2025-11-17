@@ -1,4 +1,3 @@
-'use client'
 
 import { useState, useRef, useEffect } from 'react'
 
@@ -30,11 +29,11 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
   }
 
   // Determine active section based on scroll position (not clicks)
-  const currentSectionIndex = navItems.findLastIndex(item => scrollProgress >= (sectionPositions[item.id] || 0))
+  const currentSectionIndex = navItems.findLastIndex((item: { id: string; label: string }) => scrollProgress >= (sectionPositions[item.id] || 0))
   const currentSection = currentSectionIndex >= 0 ? navItems[currentSectionIndex].id : navItems[0].id
 
   // Find highest reached section and calculate fill percentage
-  const reachedIndex = navItems.findLastIndex(item => scrollProgress >= (sectionPositions[item.id] || 0))
+  const reachedIndex = navItems.findLastIndex((item: { id: string; label: string }) => scrollProgress >= (sectionPositions[item.id] || 0))
   const fillPercent = scrollProgress >= 100 ? 100 : (() => {
     // If we're very close to the bottom, always fill to 100%
     if (scrollProgress >= 99.5) return 100
