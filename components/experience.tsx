@@ -20,27 +20,27 @@ const experiences = [
     company: 'Valeo - GISACC',
     period: 'October 2021 – January 2022',
     description: [
-      'Gained hands-on experience in software development and engineering practices.',
+      'Built a custom GCP dashboard, automating health checks and reducing manual monitoring effort.',
     ],
-    skills: ['Full-Stack Development', 'Git'],
+    skills: ['GCP', 'Full-Stack Development', 'Git'],
   },
   {
     role: 'Software Engineering Intern',
     company: 'Masarat Misr',
     period: 'June 2022 – September 2022',
     description: [
-      'Contributed to software development projects and learned industry best practices.',
+      'Built a traffic surrogate data pipeline on different cloud providers to programmatically collect live travel-time estimates from public map services. Produced a historical dataset and a Tableau dashboard that provided coverage for non-instrumented corridors and informed traffic models and operational decisions.',
     ],
-    skills: ['Software Development', 'Database Design'],
+    skills: ['Python', 'Cloud', 'Data Pipeline', 'Tableau', 'Software Development'],
   },
   {
     role: 'Software Engineering Intern',
     company: 'Valeo - GISACC',
     period: 'October 2022 – December 2022',
     description: [
-      'Continued development of technical skills and contributed to team projects.',
+      'Refactored and expanded unit testing coverage using Mockito for Valeo\'s internal project management wiki, improving maintainability, readability, and reliability of the codebase.',
     ],
-    skills: ['Full-Stack Development', 'Team Collaboration'],
+    skills: ['Java', 'Mockito', 'Unit Testing', 'Full-Stack Development', 'Team Collaboration'],
   },
 ]
 

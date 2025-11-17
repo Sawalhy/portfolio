@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 const projects = [
   {
@@ -8,8 +9,8 @@ const projects = [
     title: 'Traffic Data Scraper',
     description: 'Built a traffic surrogate data pipeline on different cloud providers to programmatically collect live travel-time estimates from public map services. Produced a historical dataset and a Tableau dashboard that provided coverage for non-instrumented corridors and informed traffic models and operational decisions.',
     tags: ['Python', 'Cloud', 'Data Pipeline', 'Tableau'],
-    image: '/modern-collaborative-workspace-interface.jpg',
-    link: '#'
+    image: '/traffic-map.jpg',
+    link: 'https://github.com/Sawalhy/traffic-data-scraper'
   },
   {
     id: 2,
@@ -24,8 +25,8 @@ const projects = [
     title: 'TimeSync – Multi-Timezone Tracker',
     description: 'Full-stack React/TypeScript + Express app that lets remote teams track 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured user dashboards, and Neon/PostgreSQL persistence for a responsive, mobile-friendly experience.',
     tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Neon'],
-    image: '/enterprise-analytics-dashboard.jpg',
-    link: '#'
+    image: '/timesync-preview.jpg',
+    link: 'https://daylight-dash.vercel.app/'
   },
 ]
 
@@ -42,8 +43,8 @@ export default function Projects() {
 
         <div className="space-y-12">
           {projects.map((project) => (
-            <div key={project.id} className="group">
-              <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300">
+            <Link key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="group block">
+              <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
                 <div className="relative h-80 md:h-96 overflow-hidden">
                   <Image
                     src={project.image || "/placeholder.svg"}
@@ -66,7 +67,7 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

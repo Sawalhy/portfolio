@@ -35,7 +35,12 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
 
   // Find highest reached section and calculate fill percentage
   const reachedIndex = navItems.findLastIndex(item => scrollProgress >= (sectionPositions[item.id] || 0))
-  const fillPercent = scrollProgress >= 100 ? 100 : reachedIndex < 0 ? 0 : (() => {
+  const fillPercent = scrollProgress >= 100 ? 100 : (() => {
+    // If we're very close to the bottom, always fill to 100%
+    if (scrollProgress >= 99.5) return 100
+    
+    if (reachedIndex < 0) return 0
+    
     // Map each section to its position on the track (0% to 100%)
     const sectionPercent = (index: number) => (index / (navItems.length - 1)) * 100
     
@@ -106,7 +111,11 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
 
             {navItems.map((item, index) => {
               const isActive = currentSection === item.id
-              const hasReached = scrollProgress >= (sectionPositions[item.id] || 0)
+              const isLast = index === navItems.length - 1
+              // For last item, also check if we're at the bottom of the page
+              const hasReached = isLast 
+                ? (scrollProgress >= (sectionPositions[item.id] || 0) || scrollProgress >= 99.5)
+                : scrollProgress >= (sectionPositions[item.id] || 0)
               const circleStyle = isActive ? 'bg-accent border-accent' : hasReached ? 'bg-accent border-accent' : 'bg-background border-border'
               
               return (
