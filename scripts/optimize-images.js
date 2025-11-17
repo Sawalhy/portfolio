@@ -12,6 +12,7 @@ const imagesToOptimize = [
   'TannourineNight.jpg',
   'WadiDegla.jpg',
   'AscentComp.jpg',
+  'Priceintel.jpg',
   'traffic-map.jpg',
   'timesync-preview.jpg',
 ];
@@ -59,8 +60,10 @@ async function optimizeImage(filename) {
     }
     
     // Optimize with quality settings - write to temp file first
+    // Handle both JPEG and other formats
+    const format = metadata.format === 'jpeg' || metadata.format === 'jpg' ? 'jpeg' : 'jpeg';
     await sharpInstance
-      .jpeg({
+      .toFormat(format, {
         quality: 85,
         progressive: true,
         mozjpeg: true,
