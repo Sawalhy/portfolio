@@ -5,15 +5,42 @@ const experiences = [
     role: 'Software Engineer',
     company: 'GISCON',
     period: 'February 2024 – Present',
-    description: 'Collaborated remotely with Product Owner and engineers to gather requirements, implement features, and resolve 10+ production incidents. Maintained 4+ critical web applications for Kuwait EPA and Egyptian Environmental Affairs Agency. Led Capacitor mobile app development and integrated OpenAI ChatGPT for spatial searches.',
-    skills: ['.NET', 'React', 'Capacitor', 'OpenAI', 'AWS', 'Airflow'],
+    description: [
+      'Collaborated remotely with Kuwait-based Product Owner and engineers to gather user requirements, implement features, and resolve 10+ production incidents with rapid response and resolution.',
+      'Maintained and enhanced over 4 critical web applications (.NET MVC, React) for Kuwait\'s Environment Public Authority (EPA) and the Egyptian Environmental Affairs Agency. Delivered UI/UX improvements, new feature deployments, and performance optimizations.',
+      'Led the development of a Capacitor-based mobile app for hazardous waste management, eliminating field reporting errors and reducing processing time.',
+      'Integrated OpenAI\'s ChatGPT to create an AI-powered conversational assistant for spatial searches and geolocation queries, improving user experience and reducing manual support workload.',
+      'Secured renewal of GISCON\'s flagship eMISK contract by delivering high-quality work and maintaining effective communication with clients and stakeholders.',
+      'Proposed and implemented Airflow health checks and failure alerts (heartbeat, task-fail) via Discord webhooks; eliminated silent DAG failures and cut time-to-detect from hours to minutes across license-expiry and integration pipelines.',
+    ],
+    skills: ['.NET', 'React', 'Capacitor', 'OpenAI API', 'AWS', 'Airflow', 'Discord API'],
   },
   {
     role: 'Software Engineering Intern',
-    company: 'Valeo - GISACC & Masarat Misr',
-    period: 'October 2021 – December 2022',
-    description: 'Gained hands-on experience in software development across multiple rotations and organizations, building foundational skills in full-stack development.',
-    skills: ['Full-Stack Development', 'Git', 'Database Design'],
+    company: 'Valeo - GISACC',
+    period: 'October 2021 – January 2022',
+    description: [
+      'Gained hands-on experience in software development and engineering practices.',
+    ],
+    skills: ['Full-Stack Development', 'Git'],
+  },
+  {
+    role: 'Software Engineering Intern',
+    company: 'Masarat Misr',
+    period: 'June 2022 – September 2022',
+    description: [
+      'Contributed to software development projects and learned industry best practices.',
+    ],
+    skills: ['Software Development', 'Database Design'],
+  },
+  {
+    role: 'Software Engineering Intern',
+    company: 'Valeo - GISACC',
+    period: 'October 2022 – December 2022',
+    description: [
+      'Continued development of technical skills and contributed to team projects.',
+    ],
+    skills: ['Full-Stack Development', 'Team Collaboration'],
   },
 ]
 
@@ -43,9 +70,36 @@ export default function Experience() {
                   <h4 className="text-xl font-bold text-foreground">{exp.role}</h4>
                   <p className="text-accent text-sm font-semibold mb-1">{exp.company}</p>
                   <p className="text-muted-foreground text-sm mb-3">{exp.period}</p>
-                  <p className="text-foreground/80">{exp.description}</p>
+                  <ul className="space-y-2 text-foreground/80">
+                    {Array.isArray(exp.description) ? (
+                      exp.description.map((desc, i) => (
+                        <li key={i} className="text-sm leading-relaxed">{desc}</li>
+                      ))
+                    ) : (
+                      <li className="text-sm leading-relaxed">{exp.description}</li>
+                    )}
+                  </ul>
+                  {exp.skills && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {exp.skills.map((skill) => (
+                        <span key={skill} className="px-2 py-1 bg-accent/10 text-accent text-xs rounded border border-accent/20">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
+            </div>
+
+            {/* Education */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-foreground mb-8">Education</h3>
+              <div className="border-l-2 border-accent pl-6">
+                <h4 className="text-xl font-bold text-foreground">B.Sc. Computer & Communications Engineering</h4>
+                <p className="text-accent text-sm font-semibold mb-1">Cairo University</p>
+                <p className="text-muted-foreground text-sm">2023</p>
+              </div>
             </div>
           </div>
 

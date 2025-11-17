@@ -30,7 +30,7 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
           </h2>
           
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto text-balance">
-            Full-stack developer. Rock climber. I build fast, scalable web applications and push limits on the wall.
+            Full Stack Software Engineer from Cairo, Egypt. Building scalable applications, solving complex problems, and pushing limits both in code and on the climbing wall.
           </p>
 
           <div className="flex gap-4 justify-center pt-8">

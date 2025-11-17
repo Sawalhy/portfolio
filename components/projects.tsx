@@ -6,7 +6,7 @@ const projects = [
   {
     id: 1,
     title: 'Traffic Data Scraper',
-    description: 'Built a traffic surrogate data pipeline on multiple cloud providers to programmatically collect live travel-time estimates from public map services. Produced historical dataset and Tableau dashboard for non-instrumented corridors.',
+    description: 'Built a traffic surrogate data pipeline on different cloud providers to programmatically collect live travel-time estimates from public map services. Produced a historical dataset and a Tableau dashboard that provided coverage for non-instrumented corridors and informed traffic models and operational decisions.',
     tags: ['Python', 'Cloud', 'Data Pipeline', 'Tableau'],
     image: '/modern-collaborative-workspace-interface.jpg',
     link: '#'
@@ -14,7 +14,7 @@ const projects = [
   {
     id: 2,
     title: 'Price-Intel E-commerce Scraper',
-    description: 'Web interface to track prices across multiple products and retailers with scheduled runs that automatically flag price changes. Provides real-time market insights and competitive pricing analysis.',
+    description: 'Web interface to track prices across multiple products and multiple retailers with scheduled runs that flags price changes automatically.',
     tags: ['Web Scraping', 'Node.js', 'React', 'Database'],
     image: '/climbing-route-tracking-app-interface.jpg',
     link: '#'
@@ -22,8 +22,8 @@ const projects = [
   {
     id: 3,
     title: 'TimeSync – Multi-Timezone Tracker',
-    description: 'Full-stack React/TypeScript + Express app that tracks 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured dashboards, and PostgreSQL persistence for responsive mobile-friendly experience.',
-    tags: ['React', 'TypeScript', 'Express', 'PostgreSQL'],
+    description: 'Full-stack React/TypeScript + Express app that lets remote teams track 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured user dashboards, and Neon/PostgreSQL persistence for a responsive, mobile-friendly experience.',
+    tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Neon'],
     image: '/enterprise-analytics-dashboard.jpg',
     link: '#'
   },

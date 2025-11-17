@@ -7,9 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Ahmed El-Sawalhy | Developer & Climber',
-  description: 'Personal portfolio of Ahmed El-Sawalhy - full-stack developer, rock climber, and builder.',
-  generator: 'v0.app',
+  title: 'Ahmed Sameh El-Sawalhy | Full Stack Software Engineer',
+  description: 'Full Stack Software Engineer from Cairo, Egypt. Building scalable applications, solving complex problems, and pushing limits both in code and on the climbing wall.',
   icons: {
     icon: [
       {
