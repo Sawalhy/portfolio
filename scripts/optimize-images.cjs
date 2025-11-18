@@ -39,6 +39,24 @@ async function optimizeImage(filename) {
       console.log(`\n💾 Saved original: ${filename}`);
     }
     
+    // Special handling for Priceintel.jpg - convert from BMP to JPEG if needed
+    if (filename === 'Priceintel.jpg') {
+      try {
+        await sharp(inputPath, { failOnError: false }).metadata();
+      } catch (error) {
+        console.log(`   🔄 Converting ${filename} from BMP to JPEG format...`);
+        const { execSync } = require('child_process');
+        const scriptPath = path.join(__dirname, 'convert-priceintel.ps1');
+        try {
+          execSync(`powershell -ExecutionPolicy Bypass -File "${scriptPath}"`, { stdio: 'inherit' });
+          console.log(`   ✅ Converted ${filename}`);
+        } catch (convError) {
+          console.error(`   ❌ Failed to convert ${filename}:`, convError.message);
+          return;
+        }
+      }
+    }
+    
     const stats = fs.statSync(inputPath);
     const originalSize = (stats.size / 1024 / 1024).toFixed(2);
     
