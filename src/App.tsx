@@ -94,7 +94,7 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       <ProgressIndicator progress={scrollProgress} enableTransition={!isInitialLoad} />
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} scrollProgress={scrollProgress} sectionPositions={sectionPositions} />
+      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} scrollProgress={scrollProgress} sectionPositions={sectionPositions} enableTransition={!isInitialLoad} />
       <main className="ml-0 md:ml-72">
         <div id="home">
           <Hero setActiveSection={setActiveSection} />

@@ -6,6 +6,7 @@ interface NavigationProps {
   setActiveSection: (section: string) => void
   scrollProgress?: number
   sectionPositions?: Record<string, number>
+  enableTransition?: boolean
 }
 
 const navItems = [
@@ -16,7 +17,7 @@ const navItems = [
   { id: 'contact', label: 'Contact' },
 ]
 
-export default function Navigation({ activeSection, setActiveSection, scrollProgress = 0, sectionPositions = {} }: NavigationProps) {
+export default function Navigation({ activeSection, setActiveSection, scrollProgress = 0, sectionPositions = {}, enableTransition = true }: NavigationProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -102,7 +103,7 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
                 style={{ top: `${trackStart}px`, height: `${trackHeight}px` }}
               >
                 <div
-                  className="absolute left-0 top-0 w-full bg-accent transition-all duration-300 ease-out"
+                  className={`absolute left-0 top-0 w-full bg-accent ${enableTransition ? 'transition-all duration-300 ease-out' : ''}`}
                   style={{ height: `${fillHeight}px` }}
                 />
               </div>
@@ -126,7 +127,7 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
                   className="relative flex items-center"
                 >
                   <div className="absolute left-0.5 -translate-x-1/2 z-50">
-                    <div className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${circleStyle}`} />
+                    <div className={`w-3 h-3 rounded-full border-2 ${enableTransition ? 'transition-all duration-300' : ''} ${circleStyle}`} />
                   </div>
                   <button onClick={() => handleNavClick(item.id)} className="block w-full text-left text-foreground hover:text-accent transition-colors duration-200 font-medium pl-5">
                     {item.label}
