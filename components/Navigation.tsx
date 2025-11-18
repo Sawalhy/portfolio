@@ -21,8 +21,8 @@ export default function Navigation({ activeSection, setActiveSection, scrollProg
   const [mobileOpen, setMobileOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [trackStart, setTrackStart] = useState(0)
-  const [trackHeight, setTrackHeight] = useState(0)
+  const [trackStart, setTrackStart] = useState(12)  // Approximate initial value to prevent flash
+  const [trackHeight, setTrackHeight] = useState(192)  // Approximate height for 5 items (6 * 32px spacing)
 
   const handleNavClick = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })

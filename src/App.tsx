@@ -7,9 +7,16 @@ import Experience from '@/components/Experience'
 import Contact from '@/components/Contact'
 import ProgressIndicator from '@/components/ProgressIndicator'
 
+// Calculate initial scroll progress synchronously to avoid flash
+const getInitialScrollProgress = () => {
+  if (typeof window === 'undefined') return 0
+  const windowHeight = document.documentElement.scrollHeight - window.innerHeight
+  return windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0
+}
+
 function App() {
   const [activeSection, setActiveSection] = useState('home')
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrollProgress, setScrollProgress] = useState(getInitialScrollProgress)
   const [isInitialLoad, setIsInitialLoad] = useState(true)
   const [sectionProgress, setSectionProgress] = useState<Record<string, number>>({
     home: 0,
