@@ -31,11 +31,6 @@ function App() {
       const windowHeight = document.documentElement.scrollHeight - window.innerHeight
       const scrolled = (window.scrollY / windowHeight) * 100
       setScrollProgress(scrolled)
-      
-      // After first scroll calculation, enable transitions
-      if (isInitialLoad) {
-        setTimeout(() => setIsInitialLoad(false), 50)
-      }
 
       // Calculate progress for each section
       const sections = ['home', 'projects', 'gallery', 'experience', 'contact']
@@ -86,8 +81,18 @@ function App() {
     }
 
     window.addEventListener('scroll', handleScroll)
+    
     // Call once on mount to set initial values
     handleScroll()
+    
+    // Enable transitions after initial render and scroll calculation
+    // Double RAF ensures this happens after both layout and paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsInitialLoad(false)
+      })
+    })
+    
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
