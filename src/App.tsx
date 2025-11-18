@@ -20,10 +20,10 @@ function App() {
   })
   const [sectionPositions, setSectionPositions] = useState<Record<string, number>>({
     home: 0,
-    projects: 0,
-    gallery: 0,
-    experience: 0,
-    contact: 0,
+    projects: Infinity,  // Use Infinity so hasReached = false until positions calculated
+    gallery: Infinity,
+    experience: Infinity,
+    contact: Infinity,
   })
 
   useEffect(() => {
