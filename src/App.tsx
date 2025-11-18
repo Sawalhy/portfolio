@@ -10,6 +10,7 @@ import ProgressIndicator from '@/components/ProgressIndicator'
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
   const [sectionProgress, setSectionProgress] = useState<Record<string, number>>({
     home: 0,
     projects: 0,
@@ -30,6 +31,11 @@ function App() {
       const windowHeight = document.documentElement.scrollHeight - window.innerHeight
       const scrolled = (window.scrollY / windowHeight) * 100
       setScrollProgress(scrolled)
+      
+      // After first scroll calculation, enable transitions
+      if (isInitialLoad) {
+        setTimeout(() => setIsInitialLoad(false), 50)
+      }
 
       // Calculate progress for each section
       const sections = ['home', 'projects', 'gallery', 'experience', 'contact']
@@ -87,7 +93,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background">
-      <ProgressIndicator progress={scrollProgress} />
+      <ProgressIndicator progress={scrollProgress} enableTransition={!isInitialLoad} />
       <Navigation activeSection={activeSection} setActiveSection={setActiveSection} scrollProgress={scrollProgress} sectionPositions={sectionPositions} />
       <main className="ml-0 md:ml-72">
         <div id="home">
