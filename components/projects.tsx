@@ -1,4 +1,4 @@
-// Helper to get image path with base URL
+﻿// Helper to get image path with base URL
 const getImagePath = (path: string) => {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 }
@@ -6,7 +6,7 @@ const getImagePath = (path: string) => {
 const projects = [
   {
     id: 1,
-    title: 'TimeSync – Multi-Timezone Tracker',
+    title: 'TimeSync â€“ Multi-Timezone Tracker',
     description: 'Full-stack React/TypeScript + Express app that lets remote teams track 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured user dashboards, and Neon/PostgreSQL persistence for a responsive, mobile-friendly experience.',
     tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Neon'],
     image: '/timesync-preview.jpg',
@@ -118,13 +118,6 @@ export default function Projects() {
                     <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{project.sectionTitle}</h3>
                     <p className="text-muted-foreground text-lg mb-4">{project.sectionDescription}</p>
                     <div className="flex flex-wrap gap-2">
-                      {project.sectionTags?.map((tag) => (
-                        <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
                   
                   {/* Wrapping container for eMISK projects */}
                   <div className="space-y-12 p-6 md:p-8 rounded-xl border-2 border-accent/30 bg-card/50 backdrop-blur-sm">
