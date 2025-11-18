@@ -1,21 +1,29 @@
+import { useEffect, useState } from 'react'
 
 interface ProgressIndicatorProps {
   progress: number
 }
 
 export default function ProgressIndicator({ progress }: ProgressIndicatorProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // Enable transitions after component mounts to prevent blink on initial load
+    setMounted(true)
+  }, [])
+
   return (
     <>
       <div className="fixed left-0 top-0 h-screen w-1 bg-border/30 z-30 hidden md:block">
         <div
-          className="w-full bg-accent transition-all duration-300"
+          className={`w-full bg-accent ${mounted ? 'transition-all duration-300' : ''}`}
           style={{ height: `${progress}%` }}
         />
       </div>
       
       {/* Progress circle indicator */}
       <div
-        className="fixed left-0 w-1 bg-accent z-30 hidden md:block transition-all duration-300"
+        className={`fixed left-0 w-1 bg-accent z-30 hidden md:block ${mounted ? 'transition-all duration-300' : ''}`}
         style={{
           top: `${progress}%`,
           height: '4px',
