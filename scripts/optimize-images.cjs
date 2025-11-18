@@ -46,7 +46,7 @@ async function optimizeImage(filename) {
     
     // Get image metadata
     const metadata = await sharp(inputPath, { failOnError: false }).metadata();
-    const maxWidth = 1600; // Reduced from 1920 for better compression
+    const maxWidth = 1400; // Reduced from 1600 for more aggressive compression
     
     let sharpInstance = sharp(inputPath, { failOnError: false });
     
@@ -64,7 +64,7 @@ async function optimizeImage(filename) {
     const format = metadata.format === 'jpeg' || metadata.format === 'jpg' ? 'jpeg' : 'jpeg';
     await sharpInstance
       .toFormat(format, {
-        quality: 75, // Reduced from 85 for more aggressive compression
+        quality: 70, // Reduced from 75 for more aggressive compression
         progressive: true,
         mozjpeg: true,
       })

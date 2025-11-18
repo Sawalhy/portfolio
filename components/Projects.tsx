@@ -6,7 +6,7 @@ const getImagePath = (path: string) => {
 const projects = [
     {
         id: 1,
-        title: 'TimeSync â€“ Multi-Timezone Tracker',
+        title: 'TimeSync - Multi-Timezone Tracker',
         description: 'Full-stack React/TypeScript + Express app that lets remote teams track 400+ timezones with real-time clocks, solar day/night timelines, JWT-secured user dashboards, and Neon/PostgreSQL persistence for a responsive, mobile-friendly experience.',
         tags: ['React', 'TypeScript', 'Express', 'PostgreSQL', 'Neon'],
         image: '/timesync-preview.jpg',
