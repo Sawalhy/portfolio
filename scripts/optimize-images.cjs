@@ -45,10 +45,10 @@ async function optimizeImage(filename) {
     console.log(`📸 Optimizing ${filename} (${originalSize} MB)...`);
     
     // Get image metadata
-    const metadata = await sharp(inputPath).metadata();
+    const metadata = await sharp(inputPath, { failOnError: false }).metadata();
     const maxWidth = 1920;
     
-    let sharpInstance = sharp(inputPath);
+    let sharpInstance = sharp(inputPath, { failOnError: false });
     
     // Resize if width exceeds maxWidth
     if (metadata.width > maxWidth) {

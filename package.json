@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "optimize-images": "node scripts/optimize-images.js",
+    "optimize-images": "node scripts/optimize-images.cjs",
     "generate-icons": "node scripts/generate-icons.js"
   },
   "dependencies": {
