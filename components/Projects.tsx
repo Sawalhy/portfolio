@@ -17,7 +17,7 @@ const projects = [
         id: 2,
         title: 'PriceIntel E-commerce Scraper',
         description: 'Web interface to track prices across multiple products and multiple retailers with scheduled runs that flags price changes automatically.',
-        tags: ['Web Scraping', 'Node.js', 'React', 'Database'],
+        tags: ['Web Scraping', 'Node.js', 'React', 'Database', 'Playwright'],
         image: '/Priceintel.jpg',
         link: '#',
         isWorkInProgress: true,
@@ -26,22 +26,23 @@ const projects = [
         id: 3,
         title: 'Traffic Data Scraper',
         description: 'Built a traffic surrogate data pipeline on different cloud providers to programmatically collect live travel-time estimates from public map services. Produced a historical dataset and a Tableau dashboard that provided coverage for non-instrumented corridors and informed traffic models and operational decisions.',
-        tags: ['Python', 'Cloud', 'Data Pipeline', 'Tableau'],
+        tags: ['Python', 'Selenium', 'AWS', 'Azure', 'Tableau'],
         image: '/traffic-map.jpg',
-        link: 'https://github.com/Sawalhy/traffic-data-scraper',
-        hasLink: true,
+        link: '#',
+        hasLink: false,
     },
     {
         id: 4,
         sectionTitle: 'eMISK Applications',
-        sectionDescription: 'A suite of web applications built for Kuwait\'s Environment Public Authority (EPA) to manage waste permits, hazardous waste transport, asbestos management, and waste treatment operations.',
+        sectionDescription: 'A suite of waste management apps built for Kuwait\'s Environment Public Authority (EPA) to manage waste permits, hazardous waste transport, asbestos management, and waste treatment operations. These applications run multiple integrations with external entities, data pipelines, code-first migrations, React components in Razor pages, and are hosted on Microsoft IIS.',
+        tags: ['.NET', 'Entity Framework', 'C#', 'Jenkins', 'Airflow', 'Razor', 'React', 'jQuery'],
         isSectionHeader: true,
     },
     {
         id: 6,
         title: 'Hazardous Waste Transport',
         description: 'Electronic service to monitor waste transport operations, from inception to disposal at the receiving facility. Allows companies to issue electronic hazardous waste manifests.',
-        tags: ['.NET', 'MVC', 'Enterprise'],
+        tags: [],
         image: '/traffic-map.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteHazardousWasteTransport/en',
         hasLink: true,
@@ -50,7 +51,7 @@ const projects = [
                 id: 7,
                 title: 'Hazardous Waste Transport Mobile App',
                 description: 'Mobile application for hazardous waste transport management, built with Capacitor for cross-platform deployment.',
-                tags: ['Capacitor', 'Mobile', '.NET'],
+                tags: ['Capacitor', 'Mobile'],
                 image: '/traffic-map.jpg',
                 link: '#',
                 hasLink: false,
@@ -61,16 +62,16 @@ const projects = [
         id: 8,
         title: 'Asbestos Management',
         description: 'Electronic service for asbestos removal, transport, and disposal requests. Enables companies to submit and track asbestos management requests online.',
-        tags: ['.NET', 'MVC', 'Enterprise'],
+        tags: [],
         image: '/traffic-map.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteAsbestosManagement',
         hasLink: true,
     },
     {
         id: 9,
-        title: 'Waste Treatment',
+        title: 'Treatment Management',
         description: 'Electronic service for waste treatment companies to submit waste data and manage treatment operations.',
-        tags: ['.NET', 'MVC', 'Enterprise'],
+        tags: [],
         image: '/traffic-map.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteTreatmentManagement',
         hasLink: true,
@@ -79,7 +80,7 @@ const projects = [
         id: 5,
         title: 'Permit Management',
         description: 'Waste Permit Request & Shipment Release System - An online portal that enables companies engaged in waste export and import to issue their permits electronically.',
-        tags: ['.NET', 'MVC', 'Enterprise'],
+        tags: [],
         image: '/traffic-map.jpg',
         link: 'https://enterprise.emisk.org/eMISKWastePermitManagement/en',
         hasLink: true,
@@ -100,16 +101,11 @@ export default function Projects() {
                 <div className="space-y-12">
                     {projects.map((project, index) => {
                         if (project.isSectionHeader) {
-                            // Find all eMISK projects that follow this header
-                            const emiskProjects = []
+                            // Find all projects that follow this header until the next section or end
+                            const sectionProjects = []
                             for (let i = index + 1; i < projects.length; i++) {
                                 if (projects[i].isSectionHeader) break
-                                // Check if it's an eMISK project (has .NET tag or is Mobile App)
-                                if (projects[i].tags?.includes('.NET') || projects[i].title === 'Hazardous Waste Transport Mobile App') {
-                                    emiskProjects.push(projects[i])
-                                } else {
-                                    break
-                                }
+                                sectionProjects.push(projects[i])
                             }
 
                             return (
@@ -117,23 +113,33 @@ export default function Projects() {
                                     <div className="mb-6">
                                         <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{project.sectionTitle}</h3>
                                         <p className="text-muted-foreground text-lg mb-4">{project.sectionDescription}</p>
+                                        {/* Section-level tags */}
+                                        {project.tags && project.tags.length > 0 && (
+                                            <div className="flex flex-wrap gap-2 mt-4">
+                                                {project.tags.map((tag) => (
+                                                    <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
 
-                                    {/* Wrapping container for eMISK projects */}
+                                    {/* Wrapping container for section projects */}
                                     <div className="space-y-12 p-6 md:p-8 rounded-xl border-2 border-accent/30 bg-card/50 backdrop-blur-sm">
-                                        {emiskProjects.map((emiskProject) => (
-                                            <div key={emiskProject.id} className="space-y-6">
+                                        {sectionProjects.map((sectionProject) => (
+                                            <div key={sectionProject.id} className="space-y-6">
                                                 <a
-                                                    href={emiskProject.link || '#'}
-                                                    target={emiskProject.link !== '#' && emiskProject.hasLink ? "_blank" : undefined}
-                                                    rel={emiskProject.link !== '#' && emiskProject.hasLink ? "noopener noreferrer" : undefined}
+                                                    href={sectionProject.link || '#'}
+                                                    target={sectionProject.link !== '#' && sectionProject.hasLink ? "_blank" : undefined}
+                                                    rel={sectionProject.link !== '#' && sectionProject.hasLink ? "noopener noreferrer" : undefined}
                                                     className="group block"
                                                 >
                                                     <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
                                                         <div className="relative h-80 md:h-96 overflow-hidden">
                                                             <img
-                                                                src={getImagePath(emiskProject.image || "/placeholder.svg")}
-                                                                alt={emiskProject.title || 'Project image'}
+                                                                src={getImagePath(sectionProject.image || "/placeholder.svg")}
+                                                                alt={sectionProject.title || 'Project image'}
                                                                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                             />
                                                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
@@ -141,30 +147,33 @@ export default function Projects() {
 
                                                         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                                                             <div className="flex items-center gap-2 mb-2">
-                                                                <h3 className="text-2xl md:text-3xl font-bold text-foreground">{emiskProject.title}</h3>
-                                                                {emiskProject.hasLink && emiskProject.link !== '#' && (
+                                                                <h3 className="text-2xl md:text-3xl font-bold text-foreground">{sectionProject.title}</h3>
+                                                                {sectionProject.hasLink && sectionProject.link !== '#' && (
                                                                     <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                                     </svg>
                                                                 )}
                                                             </div>
-                                                            <p className="text-foreground/70 mb-4 text-sm md:text-base">{emiskProject.description}</p>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {emiskProject.tags?.map((tag) => (
-                                                                    <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
-                                                                        {tag}
-                                                                    </span>
-                                                                ))}
-                                                            </div>
+                                                            <p className="text-foreground/70 mb-4 text-sm md:text-base">{sectionProject.description}</p>
+                                                            {/* Only show tags if they exist and are not empty */}
+                                                            {sectionProject.tags && sectionProject.tags.length > 0 && (
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {sectionProject.tags.map((tag) => (
+                                                                        <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                                                            {tag}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </a>
 
                                                 {/* Render subProjects if they exist */}
-                                                {(emiskProject as any).subProjects && (emiskProject as any).subProjects.length > 0 && (
+                                                {(sectionProject as any).subProjects && (sectionProject as any).subProjects.length > 0 && (
                                                     <div className="ml-4 md:ml-8 space-y-4 border-l-2 border-accent/20 pl-4 md:pl-6">
                                                         <h4 className="text-lg font-semibold text-foreground/80 mb-2">Sub Projects:</h4>
-                                                        {(emiskProject as any).subProjects.map((subProject: any) => (
+                                                        {(sectionProject as any).subProjects.map((subProject: any) => (
                                                             <a
                                                                 key={subProject.id}
                                                                 href={subProject.link || '#'}
@@ -211,8 +220,21 @@ export default function Projects() {
                             )
                         }
 
-                        // Skip eMISK projects as they're rendered in the section header
-                        if ((project.tags?.includes('.NET') && project.tags?.includes('Enterprise')) || project.title === 'Hazardous Waste Transport Mobile App') {
+                        // Check if this project was already rendered as part of a section
+                        // by looking backwards for a section header
+                        let isInSection = false
+                        for (let i = index - 1; i >= 0; i--) {
+                            if (projects[i].isSectionHeader) {
+                                isInSection = true
+                                break
+                            }
+                            // If we hit a regular project (not in a section), stop looking
+                            if (!projects[i].isSectionHeader && projects[i].title) {
+                                break
+                            }
+                        }
+                        
+                        if (isInSection) {
                             return null
                         }
 

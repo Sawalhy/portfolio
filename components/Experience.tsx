@@ -12,7 +12,6 @@ const experiences = [
       'Secured renewal of GISCON\'s flagship eMISK contract by delivering high-quality work and maintaining effective communication with clients and stakeholders.',
       'Proposed and implemented Airflow health checks and failure alerts (heartbeat, task-fail) via Discord webhooks; eliminated silent DAG failures and cut time-to-detect from hours to minutes across license-expiry and integration pipelines.',
     ],
-    skills: ['.NET', 'React', 'Capacitor', 'OpenAI API', 'AWS', 'Airflow', 'Discord API'],
   },
   {
     role: 'Software Engineering Intern',
@@ -47,7 +46,7 @@ const skills = [
   ['Languages', ['C#', 'JavaScript', 'TypeScript', 'Python', 'Solidity', 'Go']],
   ['Backend', ['.NET', 'Node.js', 'SQL', 'OpenAI API']],
   ['Frontend', ['React', 'Next.js', 'Capacitor', 'Razor', 'Tailwind CSS', 'Bootstrap', 'Ant Design']],
-  ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow']],
+  ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow', 'Github Actions']],
   ['Testing & QA', ['Jest']],
 ] as const
 
