@@ -35,7 +35,7 @@ const projects = [
         id: 4,
         sectionTitle: 'eMISK Applications',
         sectionDescription: 'A suite of waste management apps built for Kuwait\'s Environment Public Authority (EPA) to manage waste permits, hazardous waste transport, asbestos management, and waste treatment operations. These applications run multiple integrations with external entities, data pipelines, code-first migrations, React components in Razor pages, and are hosted on Microsoft IIS.',
-        tags: ['.NET', 'Entity Framework', 'C#', 'Jenkins', 'Airflow', 'Razor', 'React', 'jQuery'],
+        tags: ['.NET', 'Entity Framework', 'C#', 'Jenkins', 'Airflow', 'Razor', 'React', 'jQuery', 'OpenAI API', 'Discord API'],
         isSectionHeader: true,
     },
     {
@@ -43,7 +43,7 @@ const projects = [
         title: 'Hazardous Waste Transport',
         description: 'Electronic service to monitor waste transport operations, from inception to disposal at the receiving facility. Allows companies to issue electronic hazardous waste manifests.',
         tags: [],
-        image: '/traffic-map.jpg',
+        image: '/transport.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteHazardousWasteTransport/en',
         hasLink: true,
         subProjects: [
@@ -51,8 +51,8 @@ const projects = [
                 id: 7,
                 title: 'Hazardous Waste Transport Mobile App',
                 description: 'Mobile application for hazardous waste transport management, built with Capacitor for cross-platform deployment.',
-                tags: ['Capacitor', 'Mobile'],
-                image: '/traffic-map.jpg',
+                tags: ['Capacitor', 'Ant Design', 'Vite'],
+                image: null,
                 link: '#',
                 hasLink: false,
             },
@@ -61,9 +61,9 @@ const projects = [
     {
         id: 8,
         title: 'Asbestos Management',
-        description: 'Electronic service for asbestos removal, transport, and disposal requests. Enables companies to submit and track asbestos management requests online.',
+        description: 'Electronic service for asbestos removal, transport, and disposal requests. Enables companies to submit and track asbestos management requests online. Fully responsive design for optimal experience across all devices.',
         tags: [],
-        image: '/traffic-map.jpg',
+        image: '/asbestos.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteAsbestosManagement',
         hasLink: true,
     },
@@ -72,7 +72,7 @@ const projects = [
         title: 'Treatment Management',
         description: 'Electronic service for waste treatment companies to submit waste data and manage treatment operations.',
         tags: [],
-        image: '/traffic-map.jpg',
+        image: '/treatment.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteTreatmentManagement',
         hasLink: true,
     },
@@ -81,7 +81,7 @@ const projects = [
         title: 'Permit Management',
         description: 'Waste Permit Request & Shipment Release System - An online portal that enables companies engaged in waste export and import to issue their permits electronically.',
         tags: [],
-        image: '/traffic-map.jpg',
+        image: '/permit.jpg',
         link: 'https://enterprise.emisk.org/eMISKWastePermitManagement/en',
         hasLink: true,
     },
@@ -182,15 +182,17 @@ export default function Projects() {
                                                                 className="group block"
                                                             >
                                                                 <div className="relative overflow-hidden rounded-lg bg-card/80 border border-border/50 hover:border-accent/50 transition-colors duration-300 cursor-pointer">
-                                                                    <div className="relative h-48 md:h-64 overflow-hidden">
-                                                                        <img
-                                                                            src={getImagePath(subProject.image || "/placeholder.svg")}
-                                                                            alt={subProject.title || 'Sub-project image'}
-                                                                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                                                        />
-                                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-                                                                    </div>
-                                                                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                                                                    {subProject.image ? (
+                                                                        <div className="relative h-48 md:h-64 overflow-hidden">
+                                                                            <img
+                                                                                src={getImagePath(subProject.image)}
+                                                                                alt={subProject.title || 'Sub-project image'}
+                                                                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                                            />
+                                                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+                                                                        </div>
+                                                                    ) : null}
+                                                                    <div className={subProject.image ? "absolute bottom-0 left-0 right-0 p-4 md:p-6" : "relative p-4 md:p-6"}>
                                                                         <div className="flex items-center gap-2 mb-1">
                                                                             <h4 className="text-lg md:text-xl font-bold text-foreground">{subProject.title}</h4>
                                                                             {subProject.hasLink && subProject.link !== '#' && (
@@ -226,10 +228,6 @@ export default function Projects() {
                         for (let i = index - 1; i >= 0; i--) {
                             if (projects[i].isSectionHeader) {
                                 isInSection = true
-                                break
-                            }
-                            // If we hit a regular project (not in a section), stop looking
-                            if (!projects[i].isSectionHeader && projects[i].title) {
                                 break
                             }
                         }
