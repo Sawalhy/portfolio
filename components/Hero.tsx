@@ -31,7 +31,7 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
             Full Stack Software Engineer from Cairo, Egypt. Building scalable applications, solving complex problems, and pushing limits both in code and on the climbing wall.
           </p>
 
-          <div className="flex gap-4 justify-center pt-8">
+          <div className="flex items-center gap-6 justify-center pt-8">
             <button
               onClick={() => handleScroll('projects')}
               className="px-8 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
@@ -46,13 +46,6 @@ export default function Hero({ setActiveSection }: { setActiveSection: (section:
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Scroll indicator arrow - positioned relative to section */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
       </div>
     </section>
   )

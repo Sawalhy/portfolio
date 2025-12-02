@@ -1,11 +1,34 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+
+const initialFormState = { name: '', email: '', message: '' }
 
 export default function Contact() {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' })
+  const [formState, setFormState] = useState(initialFormState)
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+
+  const isFormValid = useMemo(() => {
+    return formState.name.trim() !== '' && formState.email.trim() !== '' && formState.message.trim() !== ''
+  }, [formState])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formState)
+    if (!isFormValid) {
+      setFeedback({ type: 'error', message: 'Please fill in all fields before sending.' })
+      return
+    }
+
+    const mailtoLink = `mailto:sawalhyahmed@gmail.com?subject=${encodeURIComponent(
+      `Portfolio inquiry from ${formState.name}`
+    )}&body=${encodeURIComponent(`Name: ${formState.name}\nEmail: ${formState.email}\n\n${formState.message}`)}`
+
+    try {
+      window.location.href = mailtoLink
+      setFeedback({ type: 'success', message: 'Opening your email client… feel free to review the draft before sending!' })
+      setFormState(initialFormState)
+    } catch (error) {
+      console.error(error)
+      setFeedback({ type: 'error', message: 'Unable to open your email client. Please try again or email me directly.' })
+    }
   }
 
   return (
@@ -55,10 +78,16 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                disabled={!isFormValid}
+                className="w-full px-6 py-3 bg-accent text-accent-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Send Message
               </button>
+              {feedback && (
+                <p className={`text-sm ${feedback.type === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+                  {feedback.message}
+                </p>
+              )}
             </form>
           </div>
 
