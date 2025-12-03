@@ -15,6 +15,11 @@ const imagesToOptimize = [
   'Priceintel.jpg',
   'traffic-map.jpg',
   'timesync-preview.jpg',
+  'transport.jpg',
+  'asbestos.jpg',
+  'treatment.jpg',
+  'permit.jpg',
+  'ifsc.jpg',
 ];
 
 // Ensure originals directory exists
