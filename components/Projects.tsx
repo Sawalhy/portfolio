@@ -46,6 +46,7 @@ const projects = [
         image: '/transport.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteHazardousWasteTransport/en',
         hasLink: true,
+        isEmiskProject: true,
         subProjects: [
             {
                 id: 7,
@@ -66,6 +67,7 @@ const projects = [
         image: '/asbestos.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteAsbestosManagement',
         hasLink: true,
+        isEmiskProject: true,
     },
     {
         id: 9,
@@ -75,6 +77,7 @@ const projects = [
         image: '/treatment.jpg',
         link: 'https://enterprise.emisk.org/eMISKWasteTreatmentManagement',
         hasLink: true,
+        isEmiskProject: true,
     },
     {
         id: 5,
@@ -84,6 +87,24 @@ const projects = [
         image: '/permit.jpg',
         link: 'https://enterprise.emisk.org/eMISKWastePermitManagement/en',
         hasLink: true,
+        isEmiskProject: true,
+    },
+    // {
+    //     id: 10,
+    //     title: 'IFSC-Compliant Climbing Competition Judge',
+    //     description: 'An open-source tool that automates scoring for climbing competitions using official IFSC rules. It streamlines judge workflows by tracking attempts, tops, zones, and time, then producing fully compliant rankings in real time. Designed for accuracy, transparency, and ease of use, it supports both Boulder and Lead formats and can be integrated into local comps or larger events.',
+    //     tags: [],
+    //     image: '/ifsc.jpg',
+    //     link: '#',
+    //     isWorkInProgress: true,
+    // },
+    {
+        id: 11,
+        title: 'Opinion Pilot',
+        description: 'Built an automated system that analyzes public statements to infer an individual’s leanings on sensitive topics. Developed a hybrid NLP pipeline using fine-tuned transformers and LLM reasoning to classify stances, aggregate insights, and generate clear, interpretable profiles for media and public-appearance screening.',
+        tags: ['Node.js', 'Python', 'BERT', 'React', 'NLP', 'Feature Extraction'],
+        image: '',
+        link: '#',
     },
 ]
 
@@ -101,10 +122,11 @@ export default function Projects() {
                 <div className="space-y-12">
                     {projects.map((project, index) => {
                         if (project.isSectionHeader) {
-                            // Find all projects that follow this header until the next section or end
+                            // Find all projects flagged for this section
                             const sectionProjects = []
                             for (let i = index + 1; i < projects.length; i++) {
                                 if (projects[i].isSectionHeader) break
+                                if (!projects[i].isEmiskProject) break
                                 sectionProjects.push(projects[i])
                             }
 
@@ -222,17 +244,7 @@ export default function Projects() {
                             )
                         }
 
-                        // Check if this project was already rendered as part of a section
-                        // by looking backwards for a section header
-                        let isInSection = false
-                        for (let i = index - 1; i >= 0; i--) {
-                            if (projects[i].isSectionHeader) {
-                                isInSection = true
-                                break
-                            }
-                        }
-                        
-                        if (isInSection) {
+                        if (project.isEmiskProject) {
                             return null
                         }
 
@@ -245,38 +257,70 @@ export default function Projects() {
                                 className="group block"
                             >
                                 <div className="relative overflow-hidden rounded-xl bg-card border border-border hover:border-accent transition-colors duration-300 cursor-pointer">
-                                    <div className="relative h-80 md:h-96 overflow-hidden">
-                                        <img
-                                            src={getImagePath(project.image || "/placeholder.svg")}
-                                            alt={project.title || 'Project image'}
-                                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
-                                    </div>
+                                    {project.image ? (
+                                        <>
+                                            <div className="relative h-80 md:h-96 overflow-hidden">
+                                                <img
+                                                    src={getImagePath(project.image)}
+                                                    alt={project.title || 'Project image'}
+                                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+                                            </div>
 
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <h3 className="text-2xl md:text-3xl font-bold text-foreground">{project.title}</h3>
-                                            {project.hasLink && project.link !== '#' && (
-                                                <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                </svg>
-                                            )}
+                                            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <h3 className="text-2xl md:text-3xl font-bold text-foreground">{project.title}</h3>
+                                                    {project.hasLink && project.link !== '#' && (
+                                                        <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                        </svg>
+                                                    )}
+                                                </div>
+                                                {project.isWorkInProgress && (
+                                                    <div className="flex justify-center mb-3">
+                                                        <span className="px-3 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold">
+                                                            Work in Progress
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                <p className="text-foreground/70 mb-4 text-sm md:text-base">{project.description}</p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {project.tags?.map((tag) => (
+                                                        <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="p-6 md:p-8 space-y-4">
+                                            <div className="flex items-center gap-2">
+                                                <h3 className="text-2xl md:text-3xl font-bold text-foreground">{project.title}</h3>
+                                                {project.hasLink && project.link !== '#' && (
+                                                    <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                )}
+                                            </div>
                                             {project.isWorkInProgress && (
-                                                <span className="px-2 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold">
-                                                    Work in Progress
-                                                </span>
+                                                <div className="flex justify-center">
+                                                    <span className="px-3 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold">
+                                                        Work in Progress
+                                                    </span>
+                                                </div>
                                             )}
+                                            <p className="text-foreground/70 text-sm md:text-base">{project.description}</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.tags?.map((tag) => (
+                                                    <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <p className="text-foreground/70 mb-4 text-sm md:text-base">{project.description}</p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags?.map((tag) => (
-                                                <span key={tag} className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full border border-accent/30">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    )}
                                 </div>
                             </a>
                         )
