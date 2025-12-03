@@ -168,12 +168,17 @@ export default function Projects() {
                                                         </div>
 
                                                         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                                                            <div className="flex items-center gap-2 mb-2">
+                                                            <div className="flex items-baseline gap-2 mb-2 flex-wrap">
                                                                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">{sectionProject.title}</h3>
                                                                 {sectionProject.hasLink && sectionProject.link !== '#' && (
-                                                                    <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <svg className="w-5 h-5 text-accent flex-shrink-0 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                                     </svg>
+                                                                )}
+                                                                {sectionProject.isWorkInProgress && (
+                                                                    <span className="px-2 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold self-center mt-0.5">
+                                                                        Work in Progress
+                                                                    </span>
                                                                 )}
                                                             </div>
                                                             <p className="text-foreground/70 mb-4 text-sm md:text-base">{sectionProject.description}</p>
@@ -269,21 +274,19 @@ export default function Projects() {
                                             </div>
 
                                             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                                                <div className="flex items-center gap-2 mb-2">
+                                                <div className="flex items-baseline gap-2 mb-2 flex-wrap">
                                                     <h3 className="text-2xl md:text-3xl font-bold text-foreground">{project.title}</h3>
                                                     {project.hasLink && project.link !== '#' && (
-                                                        <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg className="w-5 h-5 text-accent flex-shrink-0 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                         </svg>
                                                     )}
-                                                </div>
-                                                {project.isWorkInProgress && (
-                                                    <div className="flex justify-center mb-3">
-                                                        <span className="px-3 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold">
+                                                    {project.isWorkInProgress && (
+                                                        <span className="px-2 py-1 bg-yellow-500/20 text-yellow-500 text-xs rounded-full border border-yellow-500/30 font-semibold self-center mt-0.5">
                                                             Work in Progress
                                                         </span>
-                                                    </div>
-                                                )}
+                                                    )}
+                                                </div>
                                                 <p className="text-foreground/70 mb-4 text-sm md:text-base">{project.description}</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {project.tags?.map((tag) => (

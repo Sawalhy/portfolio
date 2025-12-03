@@ -43,7 +43,7 @@ const experiences = [
 ]
 
 const skills = [
-  ['Languages', ['C#', 'JavaScript', 'TypeScript', 'Python', 'Solidity', 'Go']],
+  ['Languages', ['C#', 'JavaScript', 'TypeScript', 'Python', 'Solidity']],
   ['Backend', ['.NET', 'Node.js', 'SQL', 'OpenAI API']],
   ['Frontend', ['React', 'Next.js', 'Capacitor', 'Razor', 'Tailwind CSS', 'Bootstrap', 'Ant Design']],
   ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow', 'Github Actions']],
