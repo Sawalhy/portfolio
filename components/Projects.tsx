@@ -35,7 +35,7 @@ const projects = [
         id: 4,
         sectionTitle: 'eMISK Applications',
         sectionDescription: 'A suite of waste management apps built for Kuwait\'s Environment Public Authority (EPA) to manage waste permits, hazardous waste transport, asbestos management, and waste treatment operations. These applications run multiple integrations with external entities, data pipelines, code-first migrations, React components in Razor pages, and are hosted on Microsoft IIS.',
-        tags: ['.NET', 'Entity Framework', 'C#', 'Jenkins', 'Airflow', 'Razor', 'React', 'jQuery', 'OpenAI API', 'Discord API'],
+        tags: ['.NET', 'Entity Framework', 'C#', 'Jenkins', 'Airflow', 'Razor', 'React', 'jQuery', 'OpenAI API'],
         isSectionHeader: true,
     },
     {
@@ -102,7 +102,7 @@ const projects = [
         id: 11,
         title: 'Opinion Pilot',
         description: 'Built an automated system that analyzes public statements to infer an individual’s leanings on sensitive topics. Developed a hybrid NLP pipeline using fine-tuned transformers and LLM reasoning to classify stances, aggregate insights, and generate clear, interpretable profiles for media and public-appearance screening.',
-        tags: ['Node.js', 'Python', 'BERT', 'React', 'NLP', 'Feature Extraction'],
+        tags: ['Node.js', 'Python', 'BERT', 'React'],
         image: '',
         link: '#',
     },
