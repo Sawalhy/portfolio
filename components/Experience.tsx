@@ -10,7 +10,7 @@ const experiences = [
       'Led the development of a Capacitor-based mobile app for hazardous waste management, eliminating field reporting errors and reducing processing time.',
       'Integrated OpenAI\'s ChatGPT to create an AI-powered conversational assistant for spatial searches and geolocation queries, improving user experience and reducing manual support workload.',
       'Secured renewal of GISCON\'s flagship eMISK contract by delivering high-quality work and maintaining effective communication with clients and stakeholders.',
-      'Proposed and implemented Airflow health checks and failure alerts (heartbeat, task-fail) via Discord webhooks; eliminated silent DAG failures and cut time-to-detect from hours to minutes across license-expiry and integration pipelines.',
+      'Proposed and implemented Airflow health checks, weekly DAG reports, and failure alerts (heartbeat, task-fail) via Discord webhooks; eliminated silent DAG failures and cut time-to-detect from hours to minutes across license-expiry and integration pipelines.',
     ],
   },
   {
