@@ -53,10 +53,13 @@ const experiences = [
 
 const skills = [
   ['Languages', ['C#', 'JavaScript', 'TypeScript', 'Python', 'Solidity']],
-  ['Backend', ['.NET', 'Node.js', 'SQL', 'OpenAI API']],
+  [
+    'Backend',
+    ['.NET', 'Node.js', 'Express.js', 'FastAPI', 'SQL (PostgreSQL, MSSQL)', 'Prisma', 'Next.js', 'LangChain', 'OpenAI API'],
+  ],
   ['Frontend', ['React', 'Next.js', 'Capacitor', 'Razor', 'Tailwind CSS', 'Bootstrap', 'Ant Design']],
-  ['Cloud & DevOps', ['AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow', 'Github Actions']],
-  ['Testing & QA', ['Jest']],
+  ['Cloud & DevOps', ['Linux', 'AWS', 'GCP', 'Docker', 'Jenkins', 'Git', 'Airflow', 'Github Actions']],
+  ['Testing & QA', ['Jest', 'Selenium']],
 ] as const
 
 export default function Experience() {
