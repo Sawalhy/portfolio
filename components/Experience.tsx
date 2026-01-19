@@ -14,6 +14,15 @@ const experiences = [
     ],
   },
   {
+    role: 'Software Engineer',
+    company: 'ACS',
+    period: 'June 2023 – January 2024',
+    description: [
+      'Worked on the backend of a family planning software system in partnership with Egypt’s Ministry of Health.',
+      'Supported distribution and administration of multiple contraceptive types used by ministry administrators, nurses, and doctors across Egypt.',
+    ],
+  },
+  {
     role: 'Software Engineering Intern',
     company: 'Valeo - GISACC',
     period: 'October 2021 – January 2022',
