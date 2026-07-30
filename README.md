@@ -4,7 +4,7 @@ A responsive portfolio site showcasing my work as a full-stack software engineer
 
 ## 🚀 Live Site
 
-**[https://sawalhyahmed.github.io/portfolio](https://sawalhyahmed.github.io/portfolio)**
+**[https://sawalhy.github.io/portfolio](https://sawalhy.github.io/portfolio)**
 
 ## ✨ Features
 

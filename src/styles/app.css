@@ -3,18 +3,28 @@
 
 /* ══ shell ══════════════════════════════════════════════════════════════ */
 
+/* Rail and content are one composition, centred as a unit so wide screens don't
+   strand it against the left edge. 1252px = 312 rail + 940 content. */
+.shell {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1252px;
+  margin-inline: auto;
+}
+
 .rail {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  bottom: 0;
+  height: 100vh;
   width: 312px;
+  flex: none;
   z-index: 20;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
   padding: 44px 34px;
+  overflow-y: auto;
 }
 
 .rail__brand {
@@ -113,7 +123,8 @@
 .main {
   position: relative;
   z-index: 1;
-  margin-left: 312px;
+  flex: 1;
+  min-width: 0;
   max-width: 940px;
   padding: 0 56px 120px;
 }
@@ -927,10 +938,19 @@ a.project:hover {
 /* ══ responsive ═════════════════════════════════════════════════════════ */
 
 @media (max-width: 1100px) {
+  /* Stacked now, so the shell narrows to the content measure and stays centred —
+     header and content share one edge instead of drifting apart. */
+  .shell {
+    display: block;
+    max-width: 800px;
+  }
   .rail {
-    position: static;
+    /* Relative, not static: a static element ignores z-index, which would let the
+       fixed backdrop blob paint over the whole header and wash it out. */
+    position: relative;
     width: auto;
     height: auto;
+    overflow: visible;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -952,8 +972,7 @@ a.project:hover {
     width: 26px;
   }
   .main {
-    margin-left: 0;
-    max-width: 800px;
+    max-width: none;
     padding: 0 24px 96px;
   }
   .hero {

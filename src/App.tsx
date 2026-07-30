@@ -20,7 +20,7 @@ export default function App() {
   const active = useActiveSection(sectionIds)
 
   return (
-    <div className="page" ref={rootRef}>
+    <div className="page shell" ref={rootRef}>
       <Backdrop />
       <Rail active={active} />
 
