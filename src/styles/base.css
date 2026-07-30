@@ -1,0 +1,141 @@
+/* Self-hosted design-system typefaces: Caprasimo display over Figtree body.
+   The design system loads these from Google Fonts; we vendor them for performance. */
+@import '@fontsource/caprasimo/400.css';
+@import '@fontsource/figtree/400.css';
+@import '@fontsource/figtree/600.css';
+@import '@fontsource/figtree/700.css';
+
+@import './organic.css';
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-300);
+  border-radius: 999px;
+}
+
+/* — the drifting blob backdrop, shared by the portfolio and the article pages — */
+@keyframes om-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(14px, -20px) rotate(6deg);
+  }
+  66% {
+    transform: translate(-12px, 12px) rotate(-5deg);
+  }
+}
+
+@keyframes om-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(9px);
+  }
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.backdrop__blob {
+  position: absolute;
+  transition: transform 600ms var(--ease-organic);
+}
+
+.backdrop__blob--one {
+  top: -140px;
+  right: -120px;
+  width: 520px;
+  height: 520px;
+  border-radius: 62% 38% 47% 53% / 55% 48% 52% 45%;
+  background: var(--color-accent-200);
+  opacity: 0.55;
+  filter: blur(6px);
+  transform: translate3d(calc(var(--px, 0) * 26px), calc(var(--py, 0) * 26px), 0);
+  animation: om-drift 26s ease-in-out infinite;
+}
+
+.backdrop__blob--two {
+  bottom: -180px;
+  left: 180px;
+  width: 600px;
+  height: 600px;
+  border-radius: 44% 56% 60% 40% / 48% 42% 58% 52%;
+  background: var(--color-accent-2-200);
+  opacity: 0.5;
+  filter: blur(10px);
+  transform: translate3d(calc(var(--px, 0) * -34px), calc(var(--py, 0) * -22px), 0);
+  transition-duration: 700ms;
+  animation: om-drift 34s ease-in-out infinite reverse;
+}
+
+.backdrop__blob--three {
+  top: 38%;
+  left: -90px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: var(--color-accent-100);
+  opacity: 0.7;
+  filter: blur(4px);
+  transform: translate3d(calc(var(--px, 0) * 16px), calc(var(--py, 0) * -16px), 0);
+  transition-duration: 500ms;
+}
+
+/* — scroll reveal — the hook tags elements below the fold as `pending`,
+   then flips them to `in` as they cross into view. Untagged elements are
+   always visible, so nothing depends on JS to be readable. — */
+[data-reveal='pending'] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-organic),
+    transform var(--duration-slow) var(--ease-organic);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal='pending'] {
+    opacity: 1;
+    transform: none;
+  }
+}

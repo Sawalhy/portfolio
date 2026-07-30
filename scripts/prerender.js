@@ -1,15 +1,23 @@
 import { chromium } from 'playwright';
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, join, extname } from 'path';
 import { createServer } from 'http';
-import { readFile } from 'fs/promises';
-import { extname } from 'path';
+import { readFile, stat } from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const distPath = join(__dirname, '..', 'dist');
-const indexPath = join(distPath, 'index.html');
+
+const BASE = '/portfolio/';
+const PORT = 4173;
+
+/** Built HTML files to prerender — keep in step with `pages` in vite.config.ts. */
+const pages = [
+  'index.html',
+  'writing/javascript-doesnt-have-classes/index.html',
+  'writing/prototype-chain/index.html',
+];
 
 const mimeTypes = {
   '.html': 'text/html',
@@ -30,95 +38,81 @@ const mimeTypes = {
   '.otf': 'font/otf',
 };
 
+/** Resolves a request URL to a file in dist, falling back to a directory index. */
+async function resolveFile(url) {
+  const relative = decodeURIComponent(url.split('?')[0]).replace(BASE, '').replace(/^\//, '');
+  let filePath = join(distPath, relative);
+
+  if (!extname(filePath)) {
+    try {
+      if ((await stat(filePath)).isDirectory()) filePath = join(filePath, 'index.html');
+    } catch {
+      filePath = join(distPath, 'index.html');
+    }
+  }
+  return filePath;
+}
+
 async function prerender() {
   console.log('🚀 Starting prerender process...');
-  
+
   let server = null;
   let browser = null;
-  
+
   try {
-    // Start a simple static file server
     console.log('🖥️  Starting static server...');
     server = createServer(async (req, res) => {
       try {
-        let filePath = req.url === '/portfolio/' || req.url === '/portfolio' 
-          ? join(distPath, 'index.html')
-          : join(distPath, req.url.replace('/portfolio/', ''));
-        
-        const ext = extname(filePath);
-        const contentType = mimeTypes[ext] || 'application/octet-stream';
-        
+        const filePath = await resolveFile(req.url);
+        const contentType = mimeTypes[extname(filePath)] || 'application/octet-stream';
         const content = await readFile(filePath);
         res.writeHead(200, { 'Content-Type': contentType });
         res.end(content);
-      } catch (err) {
+      } catch {
         res.writeHead(404);
         res.end('Not found');
       }
     });
-    
-    await new Promise((resolve) => server.listen(4173, resolve));
-    console.log('✅ Server listening on http://localhost:4173');
-    
-    // Launch browser
+
+    await new Promise((resolve) => server.listen(PORT, resolve));
+    console.log(`✅ Server listening on http://localhost:${PORT}`);
+
     console.log('📦 Launching Chromium...');
     browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    
-    // Navigate to the server
-    console.log('🌐 Loading page...');
-    const url = 'http://localhost:4173/portfolio/';
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-    
-    // Wait for React to hydrate and render everything
-    console.log('⏳ Waiting for React hydration...');
-    await page.waitForTimeout(2000); // Give time for all async operations
-    
-    // Wait for main content to be visible
-    await page.waitForSelector('#root', { state: 'visible', timeout: 10000 });
-    
-    // Optional: Wait for specific content indicators
-    try {
-      await page.waitForSelector('nav', { timeout: 5000 });
-      await page.waitForSelector('main', { timeout: 5000 });
-    } catch (e) {
-      console.warn('⚠️  Some content selectors not found, continuing anyway...');
+
+    for (const page of pages) {
+      const route = page === 'index.html' ? BASE : `${BASE}${page.replace(/index\.html$/, '')}`;
+      const url = `http://localhost:${PORT}${route}`;
+      console.log(`🌐 Rendering ${route}`);
+
+      const tab = await browser.newPage();
+      await tab.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+      await tab.waitForSelector('#root > *', { state: 'attached', timeout: 10000 });
+      await tab.waitForTimeout(500); // let fonts settle and the reveal pass run
+
+      const html = await tab.content();
+      await tab.close();
+
+      const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+      if (!bodyMatch) throw new Error(`Could not extract rendered body for ${page}`);
+
+      // Below-fold sections are captured mid-reveal (opacity 0). Reset them so the
+      // static HTML reads in full without JavaScript; React re-tags them on mount.
+      const body = bodyMatch[1].replace(/data-reveal="(pending|in)"/g, 'data-reveal=""');
+
+      // Keep the built <head> (hashed asset links, per-page meta) and swap in the body.
+      const target = join(distPath, page);
+      const built = readFileSync(target, 'utf-8');
+      const prerendered = built.replace(/<body[^>]*>[\s\S]*<\/body>/i, `<body>${body}</body>`);
+      writeFileSync(target, prerendered, 'utf-8');
+
+      const size = (Buffer.byteLength(prerendered, 'utf-8') / 1024).toFixed(2);
+      console.log(`   ✨ ${page} — ${size} KB`);
     }
-    
-    // Get the fully rendered HTML
-    console.log('📝 Extracting rendered HTML...');
-    const html = await page.content();
-    
-    // Close browser and server
+
     await browser.close();
     await new Promise((resolve) => server.close(resolve));
-    console.log('✅ Browser and server closed');
-    
-    // Read the original HTML to preserve the structure
-    const originalHtml = readFileSync(indexPath, 'utf-8');
-    
-    // Extract the rendered body content from Playwright
-    const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-    const renderedBody = bodyMatch ? bodyMatch[1] : null;
-    
-    if (!renderedBody) {
-      throw new Error('Could not extract rendered body content');
-    }
-    
-    // Replace the body content in the original HTML
-    const prerenderedHtml = originalHtml.replace(
-      /<body[^>]*>[\s\S]*<\/body>/i,
-      `<body>${renderedBody}</body>`
-    );
-    
-    // Write the prerendered HTML back to index.html
-    writeFileSync(indexPath, prerenderedHtml, 'utf-8');
-    console.log('✨ Prerendering complete! HTML has been updated.');
-    
-    // Log file size for reference
-    const size = (Buffer.byteLength(prerenderedHtml, 'utf-8') / 1024).toFixed(2);
-    console.log(`📊 Prerendered HTML size: ${size} KB`);
-    
+    console.log('✅ Prerendering complete!');
   } catch (error) {
     console.error('❌ Prerender failed:', error);
     if (browser) await browser.close().catch(() => {});
@@ -128,4 +122,3 @@ async function prerender() {
 }
 
 prerender();
-
