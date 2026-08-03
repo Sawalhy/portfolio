@@ -15,20 +15,29 @@ export type TimelineEntry = {
 
 export const timeline: readonly TimelineEntry[] = [
   {
+    period: 'January 2026 – Present',
+    role: 'Senior Software Engineer',
+    org: '· ACS',
+    marker: 'current',
+    points: [
+      'Building Price-Intel, a price intelligence platform tracking a product catalog across three Egyptian retailers, with an operator console for price history, run health and failure triage.',
+      'Scrape failures are classified by owner, separating bot walls from stale selectors; each failure stores a screenshot and the page HTML, so triage points at the fetcher or the parsing rules without needing a rerun.',
+      'Retailers run behind per-retailer queue workers (RabbitMQ), isolating rate-limiting on one site from the other two; the concurrency invariants that make this safe are documented in the repo.',
+    ],
+  },
+  {
     period: 'Present · Alongside full-time',
     role: 'Freelance Engineer',
     org: '· Independent',
     marker: 'sage',
     points: [
       'Replatforming a bilingual Egyptian e-commerce storefront (Sawalhy Store) onto a headless TypeScript stack: Medusa v2, Next.js, Paymob payments and a 9,600-asset catalog migration.',
-      'Built PriceIntel, a multi-retailer price tracking service on RabbitMQ message queues with scheduled runs and automatic change flagging.',
     ],
   },
   {
-    period: 'February 2024 – Present',
+    period: 'February 2024 – January 2026',
     role: 'Software Engineer',
     org: '· GISCON',
-    marker: 'current',
     points: [
       'Collaborated remotely with Kuwait-based Product Owner and engineers to gather user requirements, implement features, and resolve 10+ production incidents with rapid response and resolution.',
       "Maintained and enhanced over 4 critical web applications (.NET MVC, React) for Kuwait's Environment Public Authority and the Egyptian Environmental Affairs Agency, delivering UI/UX improvements, new feature deployments and performance optimizations.",

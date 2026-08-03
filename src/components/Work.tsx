@@ -38,6 +38,7 @@ function ProjectCard({ project }: { project: Project }) {
           <h3>{project.title}</h3>
           {project.href && <Icon name="arrow-up-right" stroke="var(--color-accent-700)" />}
           {project.status && <span className="tag tag-outline">{project.status}</span>}
+          {project.demo && <span className="tag tag-outline">Demo available on request</span>}
         </div>
         <div className="project__kicker">{project.kicker}</div>
         <p className="project__body">{project.body}</p>

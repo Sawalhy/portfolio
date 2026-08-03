@@ -62,6 +62,8 @@ export type Project = {
   blob: Blob
   href?: string
   status?: string
+  /** Shows a "Demo available on request" badge — for work that isn't public. */
+  demo?: boolean
 }
 
 export const projects: readonly Project[] = [
@@ -93,6 +95,7 @@ export const projects: readonly Project[] = [
     icon: 'home',
     tone: 'accent',
     blob: 3,
+    demo: true,
   },
   {
     title: 'Sawalhy Store',
@@ -105,14 +108,14 @@ export const projects: readonly Project[] = [
     status: 'In progress',
   },
   {
-    title: 'PriceIntel',
-    kicker: 'E-commerce scraper · freelance',
-    body: 'Web interface to track prices across multiple products and retailers like Amazon and Noon, with scheduled runs that flag price changes automatically. Built on RabbitMQ message queues to support async events and future scaling.',
-    tags: ['Web Scraping', 'Node.js', 'React', 'Playwright', 'RabbitMQ'],
+    title: 'Price-Intel',
+    kicker: 'Price intelligence platform · built at ACS',
+    body: 'Price intelligence platform tracking a product catalog across three Egyptian retailers, with an operator console for price history, run health and failure triage. Scrape failures are classified by owner, separating bot walls from stale selectors, and each one stores a screenshot and the page HTML so triage points at the fetcher or the parsing rules without a rerun. Retailers run behind per-retailer queue workers (RabbitMQ), isolating rate-limiting on one site from the other two; the concurrency invariants that make this safe are documented in the repo.',
+    tags: ['Node.js', 'React', 'Playwright', 'RabbitMQ', 'Web Scraping'],
     icon: 'chart',
     tone: 'accent-2',
     blob: 5,
-    status: 'Work in progress',
+    demo: true,
   },
 ]
 
