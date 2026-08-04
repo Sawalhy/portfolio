@@ -25,15 +25,17 @@ export const timeline: readonly TimelineEntry[] = [
       'Retailers run behind per-retailer queue workers (RabbitMQ), isolating rate-limiting on one site from the other two; the concurrency invariants that make this safe are documented in the repo.',
     ],
   },
-  {
-    period: 'Present · Alongside full-time',
-    role: 'Freelance Engineer',
-    org: '· Independent',
-    marker: 'sage',
-    points: [
-      'Replatforming a bilingual Egyptian e-commerce storefront (Sawalhy Store) onto a headless TypeScript stack: Medusa v2, Next.js, Paymob payments and a 9,600-asset catalog migration.',
-    ],
-  },
+  // Freelance Engineer — hidden along with Sawalhy Store, its only listed work.
+  // Uncomment (with a bullet) to bring the role back.
+  // {
+  //   period: 'Present · Alongside full-time',
+  //   role: 'Freelance Engineer',
+  //   org: '· Independent',
+  //   marker: 'sage',
+  //   points: [
+  //     'Replatforming a bilingual Egyptian e-commerce storefront (Sawalhy Store) onto a headless TypeScript stack: Medusa v2, Next.js, Paymob payments and a 9,600-asset catalog migration.',
+  //   ],
+  // },
   {
     period: 'February 2024 – January 2026',
     role: 'Software Engineer',

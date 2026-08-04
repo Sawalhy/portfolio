@@ -97,16 +97,17 @@ export const projects: readonly Project[] = [
     blob: 3,
     demo: true,
   },
-  {
-    title: 'Sawalhy Store',
-    kicker: 'Bilingual e-commerce platform · freelance',
-    body: 'Migrating an Arabic/English WooCommerce storefront for the Egyptian market: Paymob card payments, city-level shipping zones and full RTL/LTR localization across a 9,600-asset catalog. Replatforming to a headless TypeScript stack (Medusa v2 + Next.js in a Turborepo monorepo) and migrating the legacy WordPress schema from MySQL to PostgreSQL.',
-    tags: ['Medusa v2', 'Next.js', 'TypeScript', 'Turborepo', 'PostgreSQL', 'Paymob', 'i18n / RTL'],
-    icon: 'bag',
-    tone: 'accent-2',
-    blob: 4,
-    status: 'In progress',
-  },
+  // Sawalhy Store — hidden for now. Uncomment to bring it back.
+  // {
+  //   title: 'Sawalhy Store',
+  //   kicker: 'Bilingual e-commerce platform · freelance',
+  //   body: 'Migrating an Arabic/English WooCommerce storefront for the Egyptian market: Paymob card payments, city-level shipping zones and full RTL/LTR localization across a 9,600-asset catalog. Replatforming to a headless TypeScript stack (Medusa v2 + Next.js in a Turborepo monorepo) and migrating the legacy WordPress schema from MySQL to PostgreSQL.',
+  //   tags: ['Medusa v2', 'Next.js', 'TypeScript', 'Turborepo', 'PostgreSQL', 'Paymob', 'i18n / RTL'],
+  //   icon: 'bag',
+  //   tone: 'accent-2',
+  //   blob: 4,
+  //   status: 'In progress',
+  // },
   {
     title: 'Price-Intel',
     kicker: 'Price intelligence platform · built at ACS',

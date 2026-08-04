@@ -8,7 +8,8 @@ export const site = {
   brand: 'Sawalhy.',
   role: 'Full Stack Engineer · AI Integration',
   blurb: 'Cairo, Egypt. Building scalable software, climbing hard rock.',
-  availability: 'Open to full-time roles',
+  /** Hero status pill. Set to a short line (e.g. 'Open to full-time roles') to show it; empty hides it. */
+  availability: '',
   headline: ['AI-enabled', 'software', 'engineer.'],
   intro:
     'Full Stack Software Engineer from Cairo, Egypt. I build software end to end and I use AI where it actually helps. I push limits both in code and on the climbing wall.',

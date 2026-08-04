@@ -5,10 +5,12 @@ export default function Hero() {
   return (
     <section className="hero" id="top">
       <div>
-        <div className="badge">
-          <span className="badge__dot" />
-          <span>{site.availability}</span>
-        </div>
+        {site.availability && (
+          <div className="badge">
+            <span className="badge__dot" />
+            <span>{site.availability}</span>
+          </div>
+        )}
 
         <h1 className="hero__title">
           {site.headline.map((line, i) => (
