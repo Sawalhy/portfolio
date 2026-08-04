@@ -26,9 +26,9 @@ export default function App() {
 
       <main className="main">
         <Hero />
+        <Experience />
         <Work />
         <Writing />
-        <Experience />
         <Climbing />
         <Contact />
         <Footer />

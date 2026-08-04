@@ -73,7 +73,7 @@ export default function Work() {
   const [lead, ...rest] = feature.apps
 
   return (
-    <section className="section section--work" id="work" data-reveal="">
+    <section className="section" id="work" data-reveal="">
       <SectionHead
         title="Selected work"
         lede="Projects I've built that showcase my approach to solving problems with code."

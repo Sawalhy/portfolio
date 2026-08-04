@@ -6,7 +6,7 @@ const dotClass = (marker?: 'current' | 'sage') =>
 
 export default function Experience() {
   return (
-    <section className="section" id="experience" data-reveal="">
+    <section className="section section--lead" id="experience" data-reveal="">
       <SectionHead title="Experience" />
 
       <div className="timeline">

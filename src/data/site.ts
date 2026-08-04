@@ -23,10 +23,11 @@ export const site = {
   footer: 'Built by Ahmed Sameh El-Sawalhy. Cairo, Egypt',
 } as const
 
+/** Order here drives the rail's order; keep it in step with the section order in App.tsx. */
 export const navItems = [
+  { id: 'experience', label: 'Experience' },
   { id: 'work', label: 'Work' },
   { id: 'writing', label: 'Writing' },
-  { id: 'experience', label: 'Experience' },
   { id: 'climbing', label: 'Climbing' },
   { id: 'contact', label: 'Contact' },
 ] as const
